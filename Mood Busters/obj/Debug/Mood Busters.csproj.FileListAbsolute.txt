@@ -15,3 +15,20 @@ C:\Users\Dell\source\repos\Mood Busters\Mood Busters\obj\Debug\Mood Busters.cspr
 C:\Users\Dell\source\repos\Mood Busters\Mood Busters\obj\Debug\Mood Busters.csproj.CopyComplete
 C:\Users\Dell\source\repos\Mood Busters\Mood Busters\obj\Debug\Mood Busters.exe
 C:\Users\Dell\source\repos\Mood Busters\Mood Busters\obj\Debug\Mood Busters.pdb
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\Mood Busters.exe.config
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\Mood Busters.exe
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\Mood Busters.pdb
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Core.dll
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Rekognition.dll
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Core.pdb
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Core.xml
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Rekognition.pdb
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Rekognition.xml
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csprojAssemblyReference.cache
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood_Busters.Form1.resources
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood_Busters.Properties.Resources.resources
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csproj.GenerateResource.cache
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csproj.CoreCompileInputs.cache
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csproj.CopyComplete
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.exe
+C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.pdb
