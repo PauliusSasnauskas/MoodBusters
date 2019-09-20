@@ -1,17 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Amazon;
 using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
-using Amazon.Runtime.CredentialManagement;
 
 namespace Mood_Busters
 {
@@ -38,7 +31,7 @@ namespace Mood_Busters
             }
             catch (Exception)
             {
-                MessageBox.Show("Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Could not process the image.", "Error_processing", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -71,7 +64,7 @@ namespace Mood_Busters
                 return "Failed";
             }
 
-            var credentials = new Amazon.Runtime.BasicAWSCredentials("AKIA4ZMSQDX2XMY6EG64", "qFx64vQ3tWhHZfFFbm7ybhR3JzYN6DT6o9A889OZ");
+            var credentials = new Amazon.Runtime.BasicAWSCredentials(Key.GetKeys[0], Key.GetKeys[1]);
             AmazonRekognitionClient rekognitionClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
 
             DetectFacesRequest detectFacesRequest = new DetectFacesRequest()

@@ -32,3 +32,20 @@ C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\
 C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csproj.CopyComplete
 C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.exe
 C:\Users\justa\OneDrive\Stalinis kompiuteris\MoodBusters\Mood Busters\obj\Debug\Mood Busters.pdb
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\Mood Busters.exe.config
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\Mood Busters.exe
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\Mood Busters.pdb
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Core.dll
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Rekognition.dll
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Core.pdb
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Core.xml
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Rekognition.pdb
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\bin\Debug\AWSSDK.Rekognition.xml
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csprojAssemblyReference.cache
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood_Busters.Form1.resources
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood_Busters.Properties.Resources.resources
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csproj.GenerateResource.cache
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csproj.CoreCompileInputs.cache
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood Busters.csproj.CopyComplete
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood Busters.exe
+C:\Users\gintu\Source\Repos\pauliux00\MoodBusters\Mood Busters\obj\Debug\Mood Busters.pdb
