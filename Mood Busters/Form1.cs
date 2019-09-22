@@ -23,9 +23,8 @@ namespace Mood_Busters
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "JPG Files (.*jpg)| *.jpg |PNG Files (.*png) |*.png|All Files(*.*)|*.*"; //Skirtas atrinkti reikiamus file extensionus
-
-                if (dialog.ShowDialog() == DialogResult.OK)
+                dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png"; //Skirtas atrinkti reikiamus file extensionus
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     imageLocation = dialog.FileName;
                     pictureBox1.ImageLocation = imageLocation;
@@ -36,6 +35,11 @@ namespace Mood_Busters
             {
                 MessageBox.Show("Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
