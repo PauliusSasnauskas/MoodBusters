@@ -20,8 +20,6 @@ namespace Mood_Busters
             apiClient = new AmazonRekognitionApi();
         }
 
-        string imageLocation;
-
         private void UploadButton_Click(object sender, EventArgs e)
         {
             try
@@ -31,8 +29,11 @@ namespace Mood_Busters
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     streaming_off = true;
-                    imageLocation = dialog.FileName;
+                    getMoodButton.Text = "Resume Exercising Your Face";
+                    string imageLocation = dialog.FileName;
                     analisedImageBox.ImageLocation = imageLocation;
+                    moodLabel.Text = apiClient.GetMood(imageLocation).ToString();
+                    //moodLabel.Text = "TEST MODE";                                      //COMMENT WHEN UNCOMMENTING THE LINE ABOVE AND VICE VERSA
                 }
             }
             catch (Exception)
@@ -56,16 +57,11 @@ namespace Mood_Busters
             if (getMoodButton.Text == "Get Mood")
             {
                 getMoodButton.Text = "Resume Exercising Your Face";
-                if (!streaming_off)
-                {
-                    MemoryStream memStream = new MemoryStream();
-                    analisedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
-                    //label1.Text = DetectEmotion.getEmotion(memStream);            //DISABLED TO SAVE PAULIUXAS00'S MONEY(enable for testing when pressing button less than 1000 times)
-                    moodLabel.Text = "TEST MODE";                                      //DELETE WHEN UNCOMMENTING THE LINE ABOVE
-                    streaming_off = true;
-                }
-                else moodLabel.Text = DetectEmotion.GetEmotionFromFile(imageLocation);
-
+                MemoryStream memStream = new MemoryStream();
+                analisedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
+                moodLabel.Text = apiClient.GetMood(memStream).ToString();            //DISABLED TO SAVE PAULIUXAS00'S MONEY(enable for testing when pressing button less than 1000 times)
+                //moodLabel.Text = "TEST MODE";                                      //COMMENT WHEN UNCOMMENTING THE LINE ABOVE AND VICE VERSA
+                streaming_off = true;
             }
             else
             {

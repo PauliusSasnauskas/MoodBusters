@@ -65,10 +65,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.moodLabel.AutoSize = true;
             this.moodLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moodLabel.Font = new System.Drawing.Font("Papyrus", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moodLabel.Location = new System.Drawing.Point(138, 519);
+            this.moodLabel.Font = new System.Drawing.Font("Microsoft YaHei", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moodLabel.Location = new System.Drawing.Point(155, 521);
             this.moodLabel.Name = "moodLabel";
-            this.moodLabel.Size = new System.Drawing.Size(145, 22);
+            this.moodLabel.Size = new System.Drawing.Size(111, 20);
             this.moodLabel.TabIndex = 9;
             this.moodLabel.Text = "[MOOD LABEL]";
             this.moodLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

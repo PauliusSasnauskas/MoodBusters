@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Mood_Busters
 {
@@ -28,6 +29,8 @@ namespace Mood_Busters
     interface IRecognitionApi
     {
         //
-        Mood GetMood(String imageLocation);
+        Mood GetMood(string imageLocation);
+        Mood GetMood(MemoryStream memStr);
+
     }
 }

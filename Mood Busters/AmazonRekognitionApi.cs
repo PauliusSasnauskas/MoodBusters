@@ -13,15 +13,12 @@ namespace Mood_Busters
         private AmazonRekognitionClient apiClient;
         public AmazonRekognitionApi()
         {
-            var credentials = new BasicAWSCredentials("AKIA4ZMSQDX2XMY6EG64", "qFx64vQ3tWhHZfFFbm7ybhR3JzYN6DT6o9A889OZ");
-            // TODO: išimti viešai matomą raktą, kad negalėtų kolegos naudotis mūsų pinigais
+            var credentials = new BasicAWSCredentials(Key.GetKeys[0], Key.GetKeys[1]);
             apiClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
         }
 
-
         public Mood GetMood(string imageLocation)
         {
-            Image image = new Image();
             try
             {
                 using (FileStream fs = new FileStream(imageLocation, FileMode.Open, FileAccess.Read))
@@ -29,7 +26,7 @@ namespace Mood_Busters
                     byte[] data = null;
                     data = new byte[fs.Length];
                     fs.Read(data, 0, (int)fs.Length);
-                    image.Bytes = new MemoryStream(data);
+                    return GetMood(new MemoryStream(data));                //DISABLED TO SAVE PAULIUXAS00'S MONEY(enable for testing when pressing button less than 1000 times)
                 }
             }
             catch (Exception)
@@ -37,6 +34,13 @@ namespace Mood_Busters
                 Console.WriteLine("Failed to load file " + imageLocation);
                 return new Mood { Name = MoodName.Error, Confidence = 0 };
             }
+        }
+
+
+        public Mood GetMood(MemoryStream memStr)
+        {
+            Image image = new Image();
+            image.Bytes = memStr;
 
             DetectFacesRequest detectFacesRequest = new DetectFacesRequest()
             {
