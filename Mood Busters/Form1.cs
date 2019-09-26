@@ -20,6 +20,7 @@ namespace Mood_Busters
             InitializeComponent();
             apiClient = new AmazonRekognitionApi();
             apiErrorHandler = new ErrorHandlerWindows();
+            //apiErrorHandler = new ErrorHandlerAndroid(); //For future android error handler
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
@@ -41,8 +42,7 @@ namespace Mood_Busters
             }
             catch (Exception)
             {
-                //MessageBox.Show("Could not process the image.", "Error_processing", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                apiErrorHandler.GetErrorType("Could not process the image.");
+                apiErrorHandler.GetErrorType("Could not process the image.", "Error_processing");
             }
         }
 

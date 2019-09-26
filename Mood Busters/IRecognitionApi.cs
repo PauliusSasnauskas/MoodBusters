@@ -36,5 +36,6 @@ namespace Mood_Busters
     interface IErrorHandler
     {
         void GetErrorType(string errorText);
+        void GetErrorType(string errorText, string errorName);
     }
 }

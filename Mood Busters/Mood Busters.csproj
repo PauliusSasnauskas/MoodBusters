@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmazonRekognitionApi.cs" />
+    <Compile Include="ErrorHandlerAndroid.cs" />
     <Compile Include="ErrorHandlerWindows.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

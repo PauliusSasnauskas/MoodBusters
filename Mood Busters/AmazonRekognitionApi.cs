@@ -11,10 +11,12 @@ namespace Mood_Busters
     class AmazonRekognitionApi : IRecognitionApi
     {
         private AmazonRekognitionClient apiClient;
+        private IErrorHandler apiErrorHandler;
         public AmazonRekognitionApi()
         {
             var credentials = new BasicAWSCredentials(Key.GetKeys[0], Key.GetKeys[1]);
             apiClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
+            apiErrorHandler = new ErrorHandlerWindows();
         }
 
         public Mood GetMood(string imageLocation)
@@ -31,7 +33,8 @@ namespace Mood_Busters
             }
             catch (Exception)
             {
-                Console.WriteLine("Failed to load file " + imageLocation);
+                //Console.WriteLine("Failed to load file " + imageLocation);
+                apiErrorHandler.GetErrorType("Failed to load file " + imageLocation);
                 return new Mood { Name = MoodName.Error, Confidence = 0 };
             }
         }
@@ -69,7 +72,8 @@ namespace Mood_Busters
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                //Console.WriteLine(e.Message);
+                apiErrorHandler.GetErrorType(e.Message);
             }
             return new Mood { Name = MoodName.Unknown, Confidence = 0 };
         }
