@@ -314,7 +314,7 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/**
- !tools/packages.config
+# !tools/packages.config
 
 # Tabs Studio
 *.tss
@@ -355,3 +355,4 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/visualstudio
 
 Mood_Busters/Mood_Busters.csproj
+Mood_Busters/bin/
