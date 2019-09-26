@@ -22,7 +22,6 @@ namespace Mood_Busters
         }
     }
 
-
     //
     // Summary:
     //     Interface to unify all APIs to use same function signature
@@ -32,5 +31,10 @@ namespace Mood_Busters
         Mood GetMood(string imageLocation);
         Mood GetMood(MemoryStream memStr);
 
+    }
+
+    interface IErrorHandler
+    {
+        void GetErrorType(string errorText);
     }
 }

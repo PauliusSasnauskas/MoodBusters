@@ -14,10 +14,12 @@ namespace Mood_Busters
     public partial class Form1 : Form
     {
         private IRecognitionApi apiClient;
+        private IErrorHandler apiErrorHandler;
         public Form1()
         {
             InitializeComponent();
             apiClient = new AmazonRekognitionApi();
+            apiErrorHandler = new ErrorHandlerWindows();
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
@@ -34,11 +36,13 @@ namespace Mood_Busters
                     analisedImageBox.ImageLocation = imageLocation;
                     moodLabel.Text = apiClient.GetMood(imageLocation).ToString();
                     //moodLabel.Text = "TEST MODE";                                      //COMMENT WHEN UNCOMMENTING THE LINE ABOVE AND VICE VERSA
+                    
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Could not process the image.", "Error_processing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Could not process the image.", "Error_processing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                apiErrorHandler.GetErrorType("Could not process the image.");
             }
         }
 
