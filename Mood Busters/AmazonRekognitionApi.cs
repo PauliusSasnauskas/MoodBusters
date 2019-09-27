@@ -34,7 +34,7 @@ namespace Mood_Busters
             catch (Exception)
             {
                 //Console.WriteLine("Failed to load file " + imageLocation);
-                apiErrorHandler.GetErrorType("Failed to load file " + imageLocation);
+                apiErrorHandler.ShowError("Failed to load file " + imageLocation);
                 return new Mood { Name = MoodName.Error, Confidence = 0 };
             }
         }
@@ -73,7 +73,7 @@ namespace Mood_Busters
             catch (Exception e)
             {
                 //Console.WriteLine(e.Message);
-                apiErrorHandler.GetErrorType(e.Message);
+                apiErrorHandler.ShowError(e.Message);
             }
             return new Mood { Name = MoodName.Unknown, Confidence = 0 };
         }

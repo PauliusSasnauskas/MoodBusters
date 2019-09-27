@@ -9,11 +9,7 @@ namespace Mood_Busters
 {
     class ErrorHandlerWindows : IErrorHandler
     {
-        public void GetErrorType(string errorText)
-        {
-            MessageBox.Show(errorText, "Error" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        public void GetErrorType(string errorText, string errorName)
+        public void ShowError(string errorText, string errorName = "Error")
         {
             MessageBox.Show(errorText, errorName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

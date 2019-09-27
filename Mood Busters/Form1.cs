@@ -36,13 +36,13 @@ namespace Mood_Busters
                     string imageLocation = dialog.FileName;
                     analisedImageBox.ImageLocation = imageLocation;
                     moodLabel.Text = apiClient.GetMood(imageLocation).ToString();
-                    //moodLabel.Text = "TEST MODE";                                      //COMMENT WHEN UNCOMMENTING THE LINE ABOVE AND VICE VERSA
-                    
+                    //moodLabel.Text = "TEST MODE";    //COMMENT WHEN UNCOMMENTING THE LINE ABOVE AND VICE VERSA
+
                 }
             }
             catch (Exception)
             {
-                apiErrorHandler.GetErrorType("Could not process the image.", "Error_processing");
+                apiErrorHandler.ShowError("Could not process the image.", "Error_processing");
             }
         }
 

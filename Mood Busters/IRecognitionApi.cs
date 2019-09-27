@@ -32,10 +32,4 @@ namespace Mood_Busters
         Mood GetMood(MemoryStream memStr);
 
     }
-
-    interface IErrorHandler
-    {
-        void GetErrorType(string errorText);
-        void GetErrorType(string errorText, string errorName);
-    }
 }
