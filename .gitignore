@@ -353,6 +353,3 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/visualstudio
-
-Mood_Busters/Mood_Busters.csproj
-Mood_Busters/bin/
