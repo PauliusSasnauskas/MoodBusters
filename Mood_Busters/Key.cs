@@ -28,7 +28,7 @@ namespace Mood_Busters
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("License key not found.", "Error_license", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(StringConst.ErrLicenceNotFound, StringConst.ErrLicense, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return null;
                     }
                 }
