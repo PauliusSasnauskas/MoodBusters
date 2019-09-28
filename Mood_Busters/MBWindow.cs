@@ -21,7 +21,7 @@ namespace Mood_Busters
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = StringConst.Filter;
+                dialog.Filter = StringConst.Filter + " | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     streaming_off = true;
@@ -75,7 +75,7 @@ namespace Mood_Busters
         private void SaveButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = StringConst.FilterForSaving;
+            saveFileDialog.Filter = "JPEG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|GIF (*.gif)|*.gif";
             saveFileDialog.FileName = StringConst.Capture;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {

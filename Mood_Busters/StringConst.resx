@@ -137,12 +137,8 @@
     <value>Error processing</value>
   </data>
   <data name="Filter" xml:space="preserve">
-    <value>Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png</value>
+    <value>Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png)</value>
     <comment>For file search filtering</comment>
-  </data>
-  <data name="FilterForSaving" xml:space="preserve">
-    <value>JPEG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|GIF (*.gif)|*.gif</value>
-    <comment>For saveFile dialog</comment>
   </data>
   <data name="Mood" xml:space="preserve">
     <value>Get Mood</value>

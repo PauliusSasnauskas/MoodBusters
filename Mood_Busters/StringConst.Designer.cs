@@ -115,20 +115,11 @@ namespace Mood_Busters {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png.
+        ///   Looks up a localized string similar to Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png).
         /// </summary>
         internal static string Filter {
             get {
                 return ResourceManager.GetString("Filter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to JPEG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|GIF (*.gif)|*.gif.
-        /// </summary>
-        internal static string FilterForSaving {
-            get {
-                return ResourceManager.GetString("FilterForSaving", resourceCulture);
             }
         }
         
