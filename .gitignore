@@ -5,11 +5,13 @@
 .vs/VSWorkspaceState.json
 .vs/slnx.sqlite
 .vs/ProjectSettings.json
-.vs/Mood\ Busters/
-.vs/Mood\ Busters/v16/
-.vs/Mood\ Busters/v16/.suo
-.vs/Mood\ Busters/v16/Server/
-.vs/Mood\ Busters/v16/Server/sqlite3/
+.vs/Mood_Busters/
+.vs/Mood_Busters/bin/
+.vs/Mood_Busters/obj/
+.vs/Mood_Busters/v16/
+.vs/Mood_Busters/v16/.suo
+.vs/Mood_Busters/v16/Server/
+.vs/Mood_Busters/v16/Server/sqlite3/
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
