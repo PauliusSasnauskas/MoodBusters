@@ -11,10 +11,16 @@ namespace Mood_Busters
     //
     // Summary:
     //      Struct for emotion to be passed from the interface to the UI
-    public struct Mood
+    public struct Mood : IEquatable<Mood>
     {
         public MoodName Name;
         public float Confidence;
+
+        public bool Equals(Mood other)
+        {
+            return this.Name == other.Name &&
+                Math.Abs(this.Confidence - other.Confidence) <= 30; // account for 30 percent error
+        }
 
         public override string ToString()
         {
