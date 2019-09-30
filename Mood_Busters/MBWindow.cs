@@ -21,11 +21,11 @@ namespace Mood_Busters
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+                dialog.Filter = StringConst.Filter + " | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     streaming_off = true;
-                    getMoodButton.Text = "Resume Exercising Your Face";
+                    getMoodButton.Text = StringConst.Resume;
                     string imageLocation = dialog.FileName;
                     analisedImageBox.ImageLocation = imageLocation;
                     moodLabel.Text = apiClient.GetMood(imageLocation.ToStream()).ToString();
@@ -33,7 +33,7 @@ namespace Mood_Busters
             }
             catch (Exception)
             {
-                MessageBox.Show("Could not process the image.", "Error_processing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringConst.ErrBadImage, StringConst.ErrProccesing, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -49,9 +49,9 @@ namespace Mood_Busters
 
         private void GetMoodButtonClick(Object sender, EventArgs e)
         {
-            if (getMoodButton.Text == "Get Mood")
+            if (getMoodButton.Text == StringConst.Mood)
             {
-                getMoodButton.Text = "Resume Exercising Your Face";
+                getMoodButton.Text = StringConst.Resume;
                 MemoryStream memStream = new MemoryStream();
                 analisedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
                 moodLabel.Text = apiClient.GetMood(memStream).ToString();
@@ -60,7 +60,7 @@ namespace Mood_Busters
             else
             {
                 streaming_off = false;
-                getMoodButton.Text = "Get Mood";
+                getMoodButton.Text = StringConst.Mood;
             }
         }
 
@@ -76,7 +76,7 @@ namespace Mood_Busters
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JPEG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|GIF (*.gif)|*.gif";
-            saveFileDialog.FileName = "capture1";
+            saveFileDialog.FileName = StringConst.Capture;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 ImageFormat saveFormat;

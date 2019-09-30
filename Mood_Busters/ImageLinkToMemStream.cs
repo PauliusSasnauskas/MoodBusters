@@ -19,7 +19,7 @@ namespace Mood_Busters
             }
             catch (Exception)       //TODO: Implement this normally with Error Handling class
             {
-                Console.WriteLine("Failed to load file " + imageLocation);
+                Console.WriteLine(StringConst.ErrLoading + imageLocation);
                 return null;
                 //new Mood { Name = MoodName.Error, Confidence = 0 };     -THIS WAS THE CODE BEFORE MOVING THIS TO SEPARATE CLASS. MAY BE USEFUL         
             }
