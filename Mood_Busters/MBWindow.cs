@@ -14,8 +14,6 @@ namespace Mood_Busters
         {
             InitializeComponent();
             apiClient = new AmazonRekognitionApi();
-            apiErrorHandler = new ErrorHandlerWindows();
-            //apiErrorHandler = new ErrorHandlerAndroid(); //For future android error handler
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
@@ -35,7 +33,7 @@ namespace Mood_Busters
             }
             catch (Exception)
             {
-                apiErrorHandler.ShowError(StringConst.ErrBadImage, StringConst.ErrProccesing);
+                MessageBox.Show(StringConst.ErrBadImage, StringConst.ErrProccesing, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
