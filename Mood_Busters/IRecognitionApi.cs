@@ -28,7 +28,6 @@ namespace Mood_Busters
         }
     }
 
-
     //
     // Summary:
     //     Interface to unify all APIs to use same function signature

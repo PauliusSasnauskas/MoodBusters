@@ -80,11 +80,14 @@
     <Compile Include="AmazonRekognitionApi.cs" />
     <Compile Include="ImageLinkToMemStream.cs" />
     <Compile Include="MBWindow.cs">
+    <Compile Include="ErrorHandlerAndroid.cs" />
+    <Compile Include="ErrorHandlerWindows.cs" />
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MBWindow.Designer.cs">
       <DependentUpon>MBWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="IErrorHandler.cs" />
     <Compile Include="IRecognitionApi.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="Program.cs" />

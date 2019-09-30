@@ -11,10 +11,12 @@ namespace Mood_Busters
     class AmazonRekognitionApi : IRecognitionApi
     {
         private AmazonRekognitionClient apiClient;
+        private IErrorHandler apiErrorHandler;
         public AmazonRekognitionApi()
         {
             var credentials = new BasicAWSCredentials(Key.GetKeys[0], Key.GetKeys[1]);
             apiClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
+            apiErrorHandler = new ErrorHandlerWindows();
         }
 
         public Mood GetMood(MemoryStream memStr)
@@ -49,7 +51,8 @@ namespace Mood_Busters
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                //Console.WriteLine(e.Message);
+                apiErrorHandler.ShowError(e.Message);
             }
             return new Mood { Name = MoodName.Unknown, Confidence = 0 };
         }
