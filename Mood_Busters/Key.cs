@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace Mood_Busters
 {
@@ -16,19 +16,13 @@ namespace Mood_Busters
             {
                 if (instance == null)
                 {
-                    DirectoryInfo dir = Directory.GetParent(
-                                    Directory.GetParent(
-                                        Directory.GetCurrentDirectory()).ToString());
-
                     try
                     {
-                        //TODO: Probably decrypt keys.txt which would be encrypted??
-
-                        return (File.ReadAllLines(String.Concat(dir.ToString(), "\\keys.txt")));
+                        return new string[] { ConfigurationManager.AppSettings.Get("Key0"), ConfigurationManager.AppSettings.Get("Key1") };
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show(StringConst.ErrLicenceNotFound, StringConst.ErrLicense, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("License key not found.", "Error_license", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return null;
                     }
                 }
