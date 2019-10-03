@@ -4,6 +4,7 @@ using Amazon.Rekognition.Model;
 using Amazon.Runtime;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 
 namespace Mood_Busters
@@ -13,8 +14,12 @@ namespace Mood_Busters
         private AmazonRekognitionClient apiClient;
         public AmazonRekognitionApi()
         {
-            var credentials = new BasicAWSCredentials(Key.GetKeys[0], Key.GetKeys[1]);
-            apiClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
+            try
+            {
+                var credentials = new BasicAWSCredentials(ConfigurationManager.AppSettings.Get("Key0"), ConfigurationManager.AppSettings.Get("Key1"));
+                apiClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
+            }
+            catch (Exception){ }
         }
 
         public Mood GetMood(MemoryStream memStr)
