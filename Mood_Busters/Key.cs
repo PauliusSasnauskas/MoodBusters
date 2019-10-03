@@ -14,19 +14,17 @@ namespace Mood_Busters
         {
             get
             {
-                if (instance == null)
+                if (instance != null) return instance;
+
+                try
                 {
-                    try
-                    {
-                        return new string[] { ConfigurationManager.AppSettings.Get("Key0"), ConfigurationManager.AppSettings.Get("Key1") };
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("License key not found.", "Error_license", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return null;
-                    }
+                    return new string[] { ConfigurationManager.AppSettings.Get("Key0"), ConfigurationManager.AppSettings.Get("Key1") };
                 }
-                else return instance;
+                catch (Exception)
+                {
+                    MBWindow.errorHandler.HandleAndExit(StringConst.ErrLicenceNotFound, StringConst.ErrLicense);
+                }
+                return null;
             }
         }
     }

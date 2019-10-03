@@ -125,7 +125,7 @@
     <value>Could not process the image</value>
   </data>
   <data name="ErrLicenceNotFound" xml:space="preserve">
-    <value />
+    <value>Licence keys not found.</value>
   </data>
   <data name="ErrLicense" xml:space="preserve">
     <value>Error license</value>
