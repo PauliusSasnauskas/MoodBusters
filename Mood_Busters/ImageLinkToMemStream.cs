@@ -5,7 +5,7 @@ namespace Mood_Busters
 {
     static class ImageLinkToMemStream
     {
-        public static MemoryStream ToStream( this string imageLocation)
+        public static MemoryStream ToStream(this string imageLocation)
         {
             try
             {

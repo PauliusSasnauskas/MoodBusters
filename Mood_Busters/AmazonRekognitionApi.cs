@@ -5,6 +5,7 @@ using Amazon.Runtime;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Mood_Busters
 {
@@ -35,16 +36,16 @@ namespace Mood_Busters
                 EmotionName highestConfidenceEmotion = EmotionName.UNKNOWN;
                 float highestConfidence = 0f;
                 DetectFacesResponse detectFacesResponse = apiClient.DetectFaces(detectFacesRequest);
-                foreach (FaceDetail face in detectFacesResponse.FaceDetails)
+
+                foreach (Emotion emotion in 
+                    from FaceDetail face in detectFacesResponse.FaceDetails
+                    from Emotion emotion in face.Emotions
+                    where emotion.Confidence > highestConfidence
+                    select emotion
+                        )
                 {
-                    foreach (Emotion emotion in face.Emotions)
-                    {
-                        if (emotion.Confidence > highestConfidence)
-                        {
-                            highestConfidence = emotion.Confidence;
-                            highestConfidenceEmotion = emotion.Type;
-                        }
-                    }
+                    highestConfidence = emotion.Confidence;
+                    highestConfidenceEmotion = emotion.Type;
                 }
 
                 return new Mood { Name = NormalizeEmotion(highestConfidenceEmotion), Confidence = highestConfidence };
