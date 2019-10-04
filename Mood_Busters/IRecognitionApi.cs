@@ -10,11 +10,20 @@ namespace Mood_Busters
 
     //
     // Summary:
-    //      Struct for emotion to be passed from the interface to the UI
+    //      Struct for emotion to be passed from the image recognition api to the user
     public struct Mood : IEquatable<Mood>
     {
-        public MoodName Name;
-        public float Confidence;
+        public MoodName Name { get; set; }
+        public float Confidence
+        {
+            get => Confidence;
+            set
+            {
+                if (value < 0) { Confidence = 0; }
+                else if (value > 100) { Confidence = 100; }
+                else { Confidence = value; }    // Forces the value to be in [0, 100]
+            }
+        }
 
         public bool Equals(Mood other)
         {
