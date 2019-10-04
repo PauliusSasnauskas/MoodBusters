@@ -35,6 +35,21 @@ namespace Mood_Busters
         {
             return $"{Name.ToString()} {Confidence.ToString("0")}%";
         }
+
+        public MoodName this[int index]
+        {
+            get
+            {
+                if (index == 0)
+                {
+                    return Name;
+                }
+                else
+                {
+                    return MoodName.Error;
+                }
+            }
+        }
     }
 
 
