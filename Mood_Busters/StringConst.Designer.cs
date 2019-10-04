@@ -79,7 +79,7 @@ namespace Mood_Busters {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Licence keys not found..
         /// </summary>
         internal static string ErrLicenceNotFound {
             get {

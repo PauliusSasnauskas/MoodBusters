@@ -14,5 +14,11 @@ namespace Mood_Busters
             //For future android error handler
             //Toast.MakeText(this, errorText, ToastLength.Long).Show(); 
         }
+
+        public void HandleAndExit(string errorText, string errorName = "Error")
+        {
+            ShowError(errorText, errorName);
+            //Application.exit();
+        }
     }
 }

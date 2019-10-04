@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mood_Busters
 {
-    interface IErrorHandler
+    public interface IErrorHandler
     {
         void ShowError(string errorText, string errorName = "Error");
+        void HandleAndExit(string errorText, string errorName = "Error");
     }
 }
