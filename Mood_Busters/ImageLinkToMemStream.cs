@@ -17,11 +17,10 @@ namespace Mood_Busters
                     return new MemoryStream(data);
                 }
             }
-            catch (Exception)       //TODO: Implement this normally with Error Handling class
+            catch (Exception)
             {
-                Console.WriteLine(StringConst.ErrLoading + imageLocation);
-                return null;
-                //new Mood { Name = MoodName.Error, Confidence = 0 };     -THIS WAS THE CODE BEFORE MOVING THIS TO SEPARATE CLASS. MAY BE USEFUL         
+                MBWindow.errorHandler.ShowError(StringConst.ErrLoading + imageLocation);
+                return null;      
             }
         }
     }
