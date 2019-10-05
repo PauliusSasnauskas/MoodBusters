@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing.Imaging;
+using System.Collections.Generic;
 
 namespace Mood_Busters
 {
@@ -18,6 +19,21 @@ namespace Mood_Busters
 			apiErrorHandler = new ErrorHandlerWindows();
         }
 
+        private void updateFromImage(MemoryStream stream)
+        {
+            List<Mood> moods = apiClient.GetMoods(stream);
+            if (moods == null)
+            {
+                moodLabel.Text = "Error";
+                return;
+            }
+            moodLabel.Text = "";
+            moods.ForEach(mood =>
+            {
+                moodLabel.Text += mood.ToString() + '\n';
+            });
+        }
+
         private void UploadButton_Click(object sender, EventArgs e)
         {
             try
@@ -29,8 +45,8 @@ namespace Mood_Busters
                     streaming_off = true;
                     getMoodButton.Text = StringConst.Resume;
                     string imageLocation = dialog.FileName;
-                    analisedImageBox.ImageLocation = imageLocation;
-                    moodLabel.Text = apiClient.GetMood(imageLocation.ToStream()).ToString();
+                    analyzedImageBox.ImageLocation = imageLocation;
+                    updateFromImage(imageLocation.ToStream());
                 }
             }
             catch (Exception)
@@ -55,8 +71,8 @@ namespace Mood_Busters
             {
                 getMoodButton.Text = StringConst.Resume;
                 MemoryStream memStream = new MemoryStream();
-                analisedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
-                moodLabel.Text = apiClient.GetMood(memStream).ToString();
+                analyzedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
+                updateFromImage(memStream);
                 streaming_off = true;
             }
             else
@@ -71,7 +87,7 @@ namespace Mood_Busters
             if (streaming_off) return;
             var img = capture.QueryFrame().ToImage<Bgr, byte>();
             var bmp = img.Bitmap;
-            analisedImageBox.Image = bmp;
+            analyzedImageBox.Image = bmp;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -99,7 +115,7 @@ namespace Mood_Busters
                     default:
                         goto case 1;
                 }
-                analisedImageBox.Image.Save(saveFileDialog.FileName, saveFormat);
+                analyzedImageBox.Image.Save(saveFileDialog.FileName, saveFormat);
             }
         }
     }

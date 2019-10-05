@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Mood_Busters
@@ -15,6 +16,10 @@ namespace Mood_Busters
     {
         public MoodName Name;
         public float Confidence;
+        public float Top;
+        public float Left;
+        public float Width;
+        public float Height;
 
         public bool Equals(Mood other)
         {
@@ -34,6 +39,6 @@ namespace Mood_Busters
     //     Interface to unify all APIs to use same function signature
     interface IRecognitionApi
     {
-        Mood GetMood(MemoryStream memStr);
+        List<Mood> GetMoods(MemoryStream memStr);
     }
 }

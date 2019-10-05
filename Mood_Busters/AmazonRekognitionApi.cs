@@ -20,8 +20,9 @@ namespace Mood_Busters
 			apiErrorHandler = new ErrorHandlerWindows();
         }
 
-        public Mood GetMood(MemoryStream memStr)
+        public List<Mood> GetMoods(MemoryStream memStr)
         {
+            Console.WriteLine("What");
             Image image = new Image();
             image.Bytes = memStr;
 
@@ -33,44 +34,49 @@ namespace Mood_Busters
 
             try
             {
-                EmotionName highestConfidenceEmotion = EmotionName.UNKNOWN;
-                float highestConfidence = 0f;
                 DetectFacesResponse detectFacesResponse = apiClient.DetectFaces(detectFacesRequest);
 
-                foreach (Emotion emotion in 
-                    from FaceDetail face in detectFacesResponse.FaceDetails
-                    from Emotion emotion in face.Emotions
-                    where emotion.Confidence > highestConfidence
-                    select emotion
-                        )
-                {
-                    highestConfidence = emotion.Confidence;
-                    highestConfidenceEmotion = emotion.Type;
-                }
+                // List<Mood> es = detectFacesResponse.FaceDetails.Select((face) =>
+                //     NormalizeEmotion(face.Emotions.OrderByDescending(em => em.Confidence).First(), face.BoundingBox)
+                // ).ToList();
 
-                return new Mood { Name = NormalizeEmotion(highestConfidenceEmotion), Confidence = highestConfidence };
+                List<Mood> moods = (from faces in detectFacesResponse.FaceDetails
+                                    from emotions in faces.Emotions
+                                    orderby emotions.Confidence descending
+                                    group emotions by faces into facemotions
+                                    select NormalizeEmotion(facemotions.First(), facemotions.Key.BoundingBox)).ToList();
+
+                return moods;
             }
             catch (Exception e)
             {
                 apiErrorHandler.ShowError(e.Message);
             }
-            return new Mood { Name = MoodName.Unknown, Confidence = 0 };
+            return null;
         }
 
-        private MoodName NormalizeEmotion(EmotionName emotion)
+        private Mood NormalizeEmotion(Emotion emotion, BoundingBox box)
         {
-            switch (emotion)
+            Mood mood = new Mood();
+            mood.Confidence = emotion.Confidence;
+            mood.Top = box.Top;
+            mood.Left = box.Left;
+            mood.Width = box.Width;
+            mood.Height = box.Height;
+
+            switch (emotion.Type.ToString())
             {
-                case "ANGRY":       return MoodName.Angry;
-                case "CALM":        return MoodName.Calm;
-                case "CONFUSED":    return MoodName.Confused;
-                case "DISGUSTED":   return MoodName.Disgusted;
-                case "FEAR":        return MoodName.Fear;
-                case "HAPPY":       return MoodName.Happy;
-                case "SAD":         return MoodName.Sad;
-                case "SURPRISED":   return MoodName.Surprised;
-                default:            return MoodName.Unknown;
+                case "ANGRY":       mood.Name = MoodName.Angry; break;
+                case "CALM":        mood.Name = MoodName.Calm; break;
+                case "CONFUSED":    mood.Name = MoodName.Confused; break;
+                case "DISGUSTED":   mood.Name = MoodName.Disgusted; break;
+                case "FEAR":        mood.Name = MoodName.Fear; break;
+                case "HAPPY":       mood.Name = MoodName.Happy; break;
+                case "SAD":         mood.Name = MoodName.Sad; break;
+                case "SURPRISED":   mood.Name = MoodName.Surprised; break;
+                default:            mood.Name = MoodName.Unknown; break;
             }
+            return mood;
         }
     }
 
