@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmazonRekognitionApi.cs" />
+    <Compile Include="BoundingBoxPainter.cs" />
+    <Compile Include="BoundingBoxPainterWindows.cs" />
     <Compile Include="ImageLinkToMemStream.cs" />
     <Compile Include="MBWindow.cs">
       <SubType>Form</SubType>

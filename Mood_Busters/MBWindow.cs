@@ -5,6 +5,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Mood_Busters
 {
@@ -28,10 +29,11 @@ namespace Mood_Busters
                 return;
             }
             moodLabel.Text = "";
-            moods.ForEach(mood =>
-            {
-                moodLabel.Text += mood.ToString() + '\n';
-            });
+            BoundingBoxPainter painter = new BoundingBoxPainterWindows(stream);
+            painter.PaintAll(moods);
+            analyzedImageBox.Image = painter.Image;
+
+            //moods.ForEach(mood => moodLabel.Text += mood.ToString() + '\n');
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
@@ -45,7 +47,7 @@ namespace Mood_Busters
                     streaming_off = true;
                     getMoodButton.Text = StringConst.Resume;
                     string imageLocation = dialog.FileName;
-                    analyzedImageBox.ImageLocation = imageLocation;
+                    //analyzedImageBox.ImageLocation = imageLocation;
                     updateFromImage(imageLocation.ToStream());
                 }
             }
@@ -72,8 +74,8 @@ namespace Mood_Busters
                 getMoodButton.Text = StringConst.Resume;
                 MemoryStream memStream = new MemoryStream();
                 analyzedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
-                updateFromImage(memStream);
                 streaming_off = true;
+                updateFromImage(memStream);
             }
             else
             {
@@ -82,7 +84,7 @@ namespace Mood_Busters
             }
         }
 
-        private void Streaming(Object sender, System.EventArgs e)
+        private void Streaming(object sender, EventArgs e)
         {
             if (streaming_off) return;
             var img = capture.QueryFrame().ToImage<Bgr, byte>();

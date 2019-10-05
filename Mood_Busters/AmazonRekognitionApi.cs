@@ -22,7 +22,6 @@ namespace Mood_Busters
 
         public List<Mood> GetMoods(MemoryStream memStr)
         {
-            Console.WriteLine("What");
             Image image = new Image();
             image.Bytes = memStr;
 
