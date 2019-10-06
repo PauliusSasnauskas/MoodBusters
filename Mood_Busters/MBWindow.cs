@@ -57,7 +57,7 @@ namespace Mood_Busters
             {
                 getMoodButton.Text = StringConst.Resume;
                 MemoryStream memStream = new MemoryStream();
-                analisedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
+                analisedImageBox.Image.Save(format: ImageFormat.Jpeg, stream: memStream);
                 moodLabel.Text = apiClient.GetMood(memStream).ToString();
                 streaming_off = true;
             }
