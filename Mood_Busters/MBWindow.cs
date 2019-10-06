@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing.Imaging;
+using System.Collections.Generic;
 
 namespace Mood_Busters
 {
@@ -17,6 +18,22 @@ namespace Mood_Busters
             apiClient = new AmazonRekognitionApi();
         }
 
+        private void updateFromImage(MemoryStream stream)
+        {
+            List<Mood> moods = apiClient.GetMoods(stream);
+            if (moods == null)
+            {
+                moodLabel.Text = "Error";
+                return;
+            }
+            moodLabel.Text = "";
+            BoundingBoxPainter painter = new BoundingBoxPainterWindows(stream);
+            painter.PaintAll(moods);
+            analyzedImageBox.Image = painter.Image;
+
+            //moods.ForEach(mood => moodLabel.Text += mood.ToString() + '\n');
+        }
+
         private void UploadButton_Click(object sender, EventArgs e)
         {
             try
@@ -28,8 +45,8 @@ namespace Mood_Busters
                     streaming_off = true;
                     getMoodButton.Text = StringConst.Resume;
                     string imageLocation = dialog.FileName;
-                    analisedImageBox.ImageLocation = imageLocation;
-                    moodLabel.Text = apiClient.GetMood(imageLocation.ToStream()).ToString();
+                    //analyzedImageBox.ImageLocation = imageLocation;
+                    updateFromImage(imageLocation.ToStream());
                 }
             }
             catch (Exception)
@@ -54,9 +71,9 @@ namespace Mood_Busters
             {
                 getMoodButton.Text = StringConst.Resume;
                 MemoryStream memStream = new MemoryStream();
-                analisedImageBox.Image.Save(format: ImageFormat.Jpeg, stream: memStream);
-                moodLabel.Text = apiClient.GetMood(memStream).ToString();
+                analyzedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
                 streaming_off = true;
+                updateFromImage(memStream);
             }
             else
             {
@@ -65,12 +82,11 @@ namespace Mood_Busters
             }
         }
 
-        private void Streaming(Object sender, System.EventArgs e)
+        private void Streaming(object sender, EventArgs e)
         {
             if (streaming_off) return;
             var img = capture.QueryFrame().ToImage<Bgr, byte>();
-            var bmp = img.Bitmap;
-            analisedImageBox.Image = bmp;
+            analyzedImageBox.Image = img.Bitmap;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -86,19 +102,16 @@ namespace Mood_Busters
                     case 1 :
                         saveFormat = ImageFormat.Jpeg;
                         break;
-
                     case 2 :
                         saveFormat = ImageFormat.Bmp;
                         break;
-
                     case 3 :
                         saveFormat = ImageFormat.Gif;
                         break;
-
                     default:
                         goto case 1;
                 }
-                analisedImageBox.Image.Save(saveFileDialog.FileName, saveFormat);
+                analyzedImageBox.Image.Save(saveFileDialog.FileName, saveFormat);
             }
         }
     }

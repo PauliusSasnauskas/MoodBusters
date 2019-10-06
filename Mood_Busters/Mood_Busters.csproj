@@ -75,6 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmazonRekognitionApi.cs" />
+    <Compile Include="BoundingBoxPainter.cs" />
+    <Compile Include="BoundingBoxPainterWindows.cs" />
     <Compile Include="ImageLinkToMemStream.cs" />
     <Compile Include="MBWindow.cs">
       <SubType>Form</SubType>
@@ -86,6 +88,7 @@
     </Compile>
     <Compile Include="IErrorHandler.cs" />
     <Compile Include="IRecognitionApi.cs" />
+    <Compile Include="Mood.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringConst.Designer.cs">

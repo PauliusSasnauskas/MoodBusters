@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.analisedImageBox = new System.Windows.Forms.PictureBox();
+            this.analyzedImageBox = new System.Windows.Forms.PictureBox();
             this.uploadButton = new System.Windows.Forms.Button();
             this.moodLabel = new System.Windows.Forms.Label();
             this.getMoodButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.analisedImageBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.analyzedImageBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // analisedImageBox
+            // analyzedImageBox
             // 
-            this.analisedImageBox.Location = new System.Drawing.Point(11, 10);
-            this.analisedImageBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.analisedImageBox.Name = "analisedImageBox";
-            this.analisedImageBox.Size = new System.Drawing.Size(402, 461);
-            this.analisedImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.analisedImageBox.TabIndex = 0;
-            this.analisedImageBox.TabStop = false;
+            this.analyzedImageBox.Location = new System.Drawing.Point(11, 10);
+            this.analyzedImageBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.analyzedImageBox.Name = "analyzedImageBox";
+            this.analyzedImageBox.Size = new System.Drawing.Size(402, 461);
+            this.analyzedImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.analyzedImageBox.TabIndex = 0;
+            this.analyzedImageBox.TabStop = false;
             // 
             // uploadButton
             // 
@@ -66,7 +66,7 @@
             this.moodLabel.AutoSize = true;
             this.moodLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.moodLabel.Font = new System.Drawing.Font("Microsoft YaHei", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moodLabel.Location = new System.Drawing.Point(155, 521);
+            this.moodLabel.Location = new System.Drawing.Point(155, 496);
             this.moodLabel.Name = "moodLabel";
             this.moodLabel.Size = new System.Drawing.Size(111, 20);
             this.moodLabel.TabIndex = 9;
@@ -93,7 +93,7 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // Form1
+            // MBWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,12 +102,12 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.getMoodButton);
             this.Controls.Add(this.uploadButton);
-            this.Controls.Add(this.analisedImageBox);
+            this.Controls.Add(this.analyzedImageBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
+            this.Name = "MBWindow";
             this.Text = "Mood Buster";
             this.Load += new System.EventHandler(this.MBWindow_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.analisedImageBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.analyzedImageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,7 +115,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox analisedImageBox;
+        private System.Windows.Forms.PictureBox analyzedImageBox;
         private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.Button getMoodButton;
         private System.Windows.Forms.Button saveButton;
