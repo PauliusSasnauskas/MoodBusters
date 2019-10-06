@@ -5,7 +5,6 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace Mood_Busters
 {
@@ -88,8 +87,7 @@ namespace Mood_Busters
         {
             if (streaming_off) return;
             var img = capture.QueryFrame().ToImage<Bgr, byte>();
-            var bmp = img.Bitmap;
-            analyzedImageBox.Image = bmp;
+            analyzedImageBox.Image = img.Bitmap;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -105,15 +103,12 @@ namespace Mood_Busters
                     case 1 :
                         saveFormat = ImageFormat.Jpeg;
                         break;
-
                     case 2 :
                         saveFormat = ImageFormat.Bmp;
                         break;
-
                     case 3 :
                         saveFormat = ImageFormat.Gif;
                         break;
-
                     default:
                         goto case 1;
                 }
