@@ -11,10 +11,12 @@ namespace Mood_Busters
     {
         private IRecognitionApi apiClient;
         public static IErrorHandler errorHandler = new ErrorHandlerWindows();
+        private IRegex apiRegex;
         public MBWindow()
         {
             InitializeComponent();
             apiClient = new AmazonRekognitionApi();
+            apiRegex = new RegexStringCheck();
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
@@ -28,8 +30,12 @@ namespace Mood_Busters
                     streaming_off = true;
                     getMoodButton.Text = StringConst.Resume;
                     string imageLocation = dialog.FileName;
-                    analisedImageBox.ImageLocation = imageLocation;
-                    moodLabel.Text = apiClient.GetMood(imageLocation.ToStream()).ToString();
+                    analisedImageBox.ImageLocation = imageLocation;              
+                    if(apiRegex.checkString(apiClient.GetMood(imageLocation.ToStream()).ToString()))
+                    {
+                        moodLabel.Text = apiClient.GetMood(imageLocation.ToStream()).ToString();
+                    }
+                    else errorHandler.ShowError(StringConst.ErrBadImage, StringConst.ErrProccesing);
                 }
             }
             catch (Exception)
