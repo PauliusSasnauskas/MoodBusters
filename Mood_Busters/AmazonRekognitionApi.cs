@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 
 namespace Mood_Busters
 {
@@ -42,22 +43,15 @@ namespace Mood_Busters
 
             try
             {
-                EmotionName highestConfidenceEmotion = EmotionName.UNKNOWN;
-                float highestConfidence = 0f;
                 DetectFacesResponse detectFacesResponse = apiClient.DetectFaces(detectFacesRequest);
-                foreach (FaceDetail face in detectFacesResponse.FaceDetails)
-                {
-                    foreach (Emotion emotion in face.Emotions)
-                    {
-                        if (emotion.Confidence > highestConfidence)
-                        {
-                            highestConfidence = emotion.Confidence;
-                            highestConfidenceEmotion = emotion.Type;
-                        }
-                    }
-                }
 
-                return new Mood { Name = NormalizeEmotion(highestConfidenceEmotion), Confidence = highestConfidence };
+                IEnumerable<Emotion> emotions = (from FaceDetail face in detectFacesResponse.FaceDetails        //Might do something with narrowing type conversion here somewhere
+                                                 from Emotion emotion in face.Emotions
+                                                 select emotion);
+
+                Emotion highestConfidenceEmotion = emotions.Aggregate((e1, e2) => e1.Confidence > e2.Confidence ? e1 : e2);
+
+                return new Mood { Name = NormalizeEmotion(highestConfidenceEmotion.Type), Confidence = highestConfidenceEmotion.Confidence };
             }
             catch (Exception e)
             {
