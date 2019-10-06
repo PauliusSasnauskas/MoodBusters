@@ -34,7 +34,7 @@ namespace Mood_Busters
             }
             catch (Exception)
             {
-                ErrorHandler.ShowError(StringConst.ErrBadImage, StringConst.ErrProccesing);
+                errorHandler.ShowError(StringConst.ErrBadImage, StringConst.ErrProccesing);
             }
         }
 
@@ -47,9 +47,6 @@ namespace Mood_Busters
         }
 
         bool streaming_off = false;
-
-        internal static IErrorHandler ErrorHandler { get => ErrorHandler1; set => ErrorHandler1 = value; }
-        internal static IErrorHandler ErrorHandler1 { get => errorHandler; set => errorHandler = value; }
 
         private void GetMoodButtonClick(Object sender, EventArgs e)
         {
