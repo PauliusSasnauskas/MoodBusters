@@ -14,14 +14,15 @@ namespace Mood_Busters
     public struct Mood : IEquatable<Mood>
     {
         public MoodName Name { get; set; }
+        private float _Confidence;
         public float Confidence
         {
-            get => Confidence;
+            get => _Confidence;
             set
             {
-                if (value < 0) { Confidence = 0; }
-                else if (value > 100) { Confidence = 100; }
-                else { Confidence = value; }    // Forces the value to be in [0, 100]
+                if (value < 0f) { _Confidence = 0; }
+                else if (value > 100f) { _Confidence = 100; }
+                else { _Confidence = (float)value; }    // Forces the value to be in [0, 100]
             }
         }
 
