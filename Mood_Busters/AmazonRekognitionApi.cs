@@ -30,6 +30,11 @@ namespace Mood_Busters
             }
         }
 
+        /// <summary>
+        /// Returns a list of all moods discovered in MemoryStream format image.
+        /// </summary>
+        /// <param name="memStr"></param>
+        /// <returns></returns>
         public List<Mood> GetMoods(MemoryStream memStr)
         {
             Image image = new Image();
