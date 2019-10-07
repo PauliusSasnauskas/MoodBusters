@@ -50,7 +50,7 @@ namespace Mood_Busters
             StringFormat sf = new StringFormat();
             sf.Alignment = sf.LineAlignment = StringAlignment.Center;
 
-            Graphics.DrawString(mood.ToString(), new Font("Bahnschrift", mood.Width*66), BrushFont, 
+            Graphics.DrawString(mood.ToString(), new Font("Bahnschrift", mood.Width*Image.Width/8), BrushFont, 
                 (mood.Left + mood.Width / 2) * Image.Width, (mood.Top - mood.Height / 10) * Image.Height, sf);
             Graphics.Save();
         }
