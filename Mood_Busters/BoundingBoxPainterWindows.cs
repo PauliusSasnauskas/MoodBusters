@@ -13,8 +13,8 @@ namespace Mood_Busters
         {
             Image = new Bitmap(stream);
             Graphics = Graphics.FromImage(Image);
-            Brush = new SolidBrush(Color.FromArgb(100, 100, 100, 220));
-            BrushFont = new SolidBrush(Color.FromArgb(190, 255, 255, 255));
+            Brush = new SolidBrush(Color.FromArgb(180, 100, 100, 220));
+            BrushFont = new SolidBrush(Color.FromArgb(255, 180, 180, 255));
         }
 
         public override void Paint(Mood mood)
@@ -45,7 +45,7 @@ namespace Mood_Busters
                 mood.Height * Image.Height,
                 25);
 
-            Graphics.DrawPath(new Pen(Brush, 5), path);
+            Graphics.DrawPath(new Pen(Brush, 2), path);
 
             StringFormat sf = new StringFormat();
             sf.Alignment = sf.LineAlignment = StringAlignment.Center;
