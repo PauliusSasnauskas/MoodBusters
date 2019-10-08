@@ -37,43 +37,51 @@
             // 
             // analyzedImageBox
             // 
-            this.analyzedImageBox.Location = new System.Drawing.Point(11, 10);
+            this.analyzedImageBox.Location = new System.Drawing.Point(0, 0);
             this.analyzedImageBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.analyzedImageBox.Name = "analyzedImageBox";
-            this.analyzedImageBox.Size = new System.Drawing.Size(402, 461);
+            this.analyzedImageBox.Size = new System.Drawing.Size(430, 471);
             this.analyzedImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.analyzedImageBox.TabIndex = 0;
             this.analyzedImageBox.TabStop = false;
             // 
             // uploadButton
             // 
-            this.uploadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.uploadButton.Location = new System.Drawing.Point(39, 496);
+            this.uploadButton.BackgroundImage = global::Mood_Busters.Properties.Resources.browse;
+            this.uploadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.uploadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.uploadButton.ForeColor = System.Drawing.Color.Black;
+            this.uploadButton.Location = new System.Drawing.Point(37, 496);
             this.uploadButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.uploadButton.Name = "uploadButton";
-            this.uploadButton.Size = new System.Drawing.Size(88, 66);
+            this.uploadButton.Size = new System.Drawing.Size(59, 53);
             this.uploadButton.TabIndex = 1;
-            this.uploadButton.Text = "Upload Photo";
             this.uploadButton.UseVisualStyleBackColor = true;
             this.uploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
             // getMoodButton
             // 
-            this.getMoodButton.Location = new System.Drawing.Point(150, 586);
+            this.getMoodButton.BackgroundImage = global::Mood_Busters.Properties.Resources.take_picture;
+            this.getMoodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.getMoodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.getMoodButton.ForeColor = System.Drawing.Color.Black;
+            this.getMoodButton.Location = new System.Drawing.Point(183, 489);
             this.getMoodButton.Name = "getMoodButton";
-            this.getMoodButton.Size = new System.Drawing.Size(124, 64);
+            this.getMoodButton.Size = new System.Drawing.Size(75, 67);
             this.getMoodButton.TabIndex = 6;
-            this.getMoodButton.Text = "Get Mood";
             this.getMoodButton.UseVisualStyleBackColor = true;
             this.getMoodButton.Click += new System.EventHandler(this.GetMoodButtonClick);
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(295, 496);
+            this.saveButton.BackgroundImage = global::Mood_Busters.Properties.Resources.save;
+            this.saveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.ForeColor = System.Drawing.Color.Black;
+            this.saveButton.Location = new System.Drawing.Point(341, 496);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(88, 66);
+            this.saveButton.Size = new System.Drawing.Size(58, 53);
             this.saveButton.TabIndex = 7;
-            this.saveButton.Text = "Save Image";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
@@ -81,11 +89,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 680);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(430, 575);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.getMoodButton);
             this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.analyzedImageBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MBWindow";
             this.Text = "Mood Buster";
