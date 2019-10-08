@@ -30,10 +30,11 @@ namespace Mood_Busters
                     streaming_off = true;
                     getMoodButton.Text = StringConst.Resume;
                     string imageLocation = dialog.FileName;
-                    analisedImageBox.ImageLocation = imageLocation;              
-                    if(apiRegex.checkString(apiClient.GetMood(imageLocation.ToStream()).ToString()))
+                    analisedImageBox.ImageLocation = imageLocation;
+                    string moodText = apiClient.GetMood(imageLocation.ToStream()).ToString();
+                    if (apiRegex.checkString(moodText))
                     {
-                        moodLabel.Text = apiClient.GetMood(imageLocation.ToStream()).ToString();
+                        moodLabel.Text = moodText;
                     }
                     else errorHandler.ShowError(StringConst.ErrBadImage, StringConst.ErrProccesing);
                 }
