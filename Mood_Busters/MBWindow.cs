@@ -16,7 +16,7 @@ namespace Mood_Busters
 
         public MBWindow()
         {
-            InitializeComponent();
+            InitializeComponent();      
             apiClient = new AmazonRekognitionApi();
             saveDialog = new SaveFileDialog();
             cameraBox = new CameraBox(analyzedImageBox);
@@ -45,18 +45,22 @@ namespace Mood_Busters
         {
             if ((memStream = ImageUploadDialog.PictureStream()) != null)
             {
-                getMoodButton.Text = StringConst.Resume;
+                isResultScreen = true;
+                getMoodButton.BackgroundImage = Properties.Resources.resume;
                 cameraBox.StopCamera();
                 updateFromImage(memStream);
             }
             else return;
         }
 
+        private bool isResultScreen = false;
         private void GetMoodButtonClick(Object sender, EventArgs e)
         {
-            if (getMoodButton.Text == StringConst.Mood)
+            // TODO: there may be a better method of changing the pictures
+            if (!isResultScreen)
             {
-                getMoodButton.Text = StringConst.Resume;
+                isResultScreen = true;
+                getMoodButton.BackgroundImage = Properties.Resources.resume;
                 memStream = new MemoryStream();
                 analyzedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
                 cameraBox.StopCamera();
@@ -64,8 +68,9 @@ namespace Mood_Busters
             }
             else
             {
+                isResultScreen = false;
                 cameraBox.ResumeCamera();
-                getMoodButton.Text = StringConst.Mood;
+                getMoodButton.BackgroundImage = Properties.Resources.take_picture;
             }
         }
 
