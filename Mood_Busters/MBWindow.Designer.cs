@@ -30,7 +30,6 @@
         {
             this.analyzedImageBox = new System.Windows.Forms.PictureBox();
             this.uploadButton = new System.Windows.Forms.Button();
-            this.moodLabel = new System.Windows.Forms.Label();
             this.getMoodButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.analyzedImageBox)).BeginInit();
@@ -58,21 +57,6 @@
             this.uploadButton.UseVisualStyleBackColor = true;
             this.uploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
-            // moodLabel
-            // 
-            this.moodLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.moodLabel.AutoSize = true;
-            this.moodLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moodLabel.Font = new System.Drawing.Font("Microsoft YaHei", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moodLabel.Location = new System.Drawing.Point(155, 496);
-            this.moodLabel.Name = "moodLabel";
-            this.moodLabel.Size = new System.Drawing.Size(111, 20);
-            this.moodLabel.TabIndex = 9;
-            this.moodLabel.Text = "[MOOD LABEL]";
-            this.moodLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // getMoodButton
             // 
             this.getMoodButton.Location = new System.Drawing.Point(150, 586);
@@ -98,7 +82,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 680);
-            this.Controls.Add(this.moodLabel);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.getMoodButton);
             this.Controls.Add(this.uploadButton);
@@ -109,7 +92,6 @@
             this.Load += new System.EventHandler(this.MBWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.analyzedImageBox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -119,7 +101,6 @@
         private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.Button getMoodButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Label moodLabel;
     }
 }
 

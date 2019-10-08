@@ -77,6 +77,11 @@
     <Compile Include="AmazonRekognitionApi.cs" />
     <Compile Include="BoundingBoxPainter.cs" />
     <Compile Include="BoundingBoxPainterWindows.cs" />
+    <Compile Include="CameraBox.cs" />
+    <Compile Include="Interfaces\ICamera.cs" />
+    <Compile Include="ImageUploadDialog.cs" />
+    <Compile Include="Interfaces\IImageSaver.cs" />
+    <Compile Include="SaveFileDialog.cs" />
     <Compile Include="ImageLinkToMemStream.cs" />
     <Compile Include="MBWindow.cs">
       <SubType>Form</SubType>
@@ -86,8 +91,8 @@
     <Compile Include="MBWindow.Designer.cs">
       <DependentUpon>MBWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="IErrorHandler.cs" />
-    <Compile Include="IRecognitionApi.cs" />
+    <Compile Include="Interfaces\IErrorHandler.cs" />
+    <Compile Include="Interfaces\IRecognitionApi.cs" />
     <Compile Include="Mood.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

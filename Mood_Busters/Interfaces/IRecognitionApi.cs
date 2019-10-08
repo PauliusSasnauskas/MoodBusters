@@ -4,9 +4,9 @@ using System.IO;
 
 namespace Mood_Busters
 {
-    //
-    // Summary:
-    //     Interface to unify all APIs to use same function signature
+    /// <summary>
+    /// Interface to unify all APIs to use same function signature
+    /// </summary>
     interface IRecognitionApi
     {
         List<Mood> GetMoods(MemoryStream memStr);

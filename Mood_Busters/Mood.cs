@@ -2,14 +2,14 @@
 
 namespace Mood_Busters
 {
-    //
-    // Summary:
-    //     Enum to unify all defining moods of a response
+    /// <summary>
+    /// Enum to unify all defining moods of a response.
+    /// </summary>
     public enum MoodName { Error, Unknown, Happy, Sad, Angry, Confused, Disgusted, Surprised, Calm, Fear }
 
-    //
-    // Summary:
-    //      Struct for emotion to be passed from the interface to the UI
+    /// <summary>
+    /// Struct for emotion to be passed from the interface to the UI.
+    /// </summary>
     public sealed class Mood : IEquatable<Mood>
     {
         public MoodName Name;
@@ -21,7 +21,7 @@ namespace Mood_Busters
 
         public bool Equals(Mood other)
         {
-            return Name == other.Name &&
+            return Name == other.Name &
                 Math.Abs(Confidence - other.Confidence) <= 30; // account for 30 percent error
         }
 
