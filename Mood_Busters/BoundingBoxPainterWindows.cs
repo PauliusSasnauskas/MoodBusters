@@ -19,6 +19,10 @@ namespace Mood_Busters
 
         public override void Paint(Mood mood)
         {
+            if (!RegexStringCheck.checkString(mood.ToString()))
+            {
+                return;
+            }
             GraphicsPath DrawRoundedRectangle(float x, float y,
                 float width, float height, float r)
             {
@@ -35,7 +39,7 @@ namespace Mood_Busters
                 Path.AddArc(x, dY - d, d, d, 90, 90);
                 Path.AddLine(x, dY - d, x, y+r);
                 Path.AddArc(x, y, d, d, 180, 90);
-                return Path;
+                return Path; 
             }
 
             GraphicsPath path = DrawRoundedRectangle( 
@@ -43,7 +47,7 @@ namespace Mood_Busters
                 mood.Top * Image.Height,
                 mood.Width * Image.Width,
                 mood.Height * Image.Height,
-                25);
+                50);
 
             Graphics.DrawPath(new Pen(Brush, 2), path);
 
