@@ -1,112 +1,84 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Emgu.CV;
-using Emgu.CV.Structure;
 using System.Drawing.Imaging;
+using System.Collections.Generic;
 
 namespace Mood_Busters
 {
     public partial class MBWindow : Form
     {
         private IRecognitionApi apiClient;
+        private ICameraBox cameraBox;
+        private IImageSaver saveDialog;
         public static IErrorHandler errorHandler = new ErrorHandlerWindows();
-        private IRegex apiRegex;
+        private IRegex regexChecker;
+        private MemoryStream memStream;
+        
         public MBWindow()
         {
-            InitializeComponent();
+            InitializeComponent();      
             apiClient = new AmazonRekognitionApi();
-            apiRegex = new RegexStringCheck();
+            regexChecker = new RegexStringCheck();
+            saveDialog = new SaveFileDialog();
+            cameraBox = new CameraBox(analyzedImageBox);
+        }
+
+        private void MBWindow_Load(object sender, EventArgs e)
+        {
+            Application.Idle += cameraBox.StreamFrames;
+        }
+
+        private void updateFromImage(MemoryStream stream)
+        {
+            List<Mood> moods = apiClient.GetMoods(stream);
+            if (moods == null)
+            {
+                return;
+            }
+            BoundingBoxPainter painter = new BoundingBoxPainterWindows(stream);
+            painter.PaintAll(moods);
+            analyzedImageBox.Image = painter.Image;
+
+            //moods.ForEach(mood => moodLabel.Text += mood.ToString() + '\n');
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
         {
-            try
+            if ((memStream = ImageUploadDialog.PictureStream()) != null)
             {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = StringConst.Filter + " | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    streaming_off = true;
-                    getMoodButton.Text = StringConst.Resume;
-                    string imageLocation = dialog.FileName;
-                    analisedImageBox.ImageLocation = imageLocation;
-                    string moodText = apiClient.GetMood(imageLocation.ToStream()).ToString();
-                    if (apiRegex.checkString(moodText))
-                    {
-                        moodLabel.Text = moodText;
-                    }
-                    else errorHandler.ShowError(StringConst.ErrBadImage, StringConst.ErrProccesing);
-                }
+                isResultScreen = true;
+                getMoodButton.BackgroundImage = Properties.Resources.resume;
+                cameraBox.StopCamera();
+                updateFromImage(memStream);
             }
-            catch (Exception)
-            {
-                errorHandler.ShowError(StringConst.ErrBadImage, StringConst.ErrProccesing);
-            }
+            else return;
         }
 
-        Capture capture;
-
-        private void MBWindow_Load(object sender, EventArgs e)
-        {
-            capture = new Capture();            
-            Application.Idle += Streaming;
-        }
-
-        bool streaming_off = false;
-
+        private bool isResultScreen = false;
         private void GetMoodButtonClick(Object sender, EventArgs e)
         {
-            if (getMoodButton.Text == StringConst.Mood)
+            // TODO: there may be a better method of changing the pictures
+            if (!isResultScreen)
             {
-                getMoodButton.Text = StringConst.Resume;
-                MemoryStream memStream = new MemoryStream();
-                analisedImageBox.Image.Save(format: ImageFormat.Jpeg, stream: memStream);
-                moodLabel.Text = apiClient.GetMood(memStream).ToString();
-                streaming_off = true;
+                isResultScreen = true;
+                getMoodButton.BackgroundImage = Properties.Resources.resume;
+                memStream = new MemoryStream();
+                analyzedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
+                cameraBox.StopCamera();
+                updateFromImage(memStream);
             }
             else
             {
-                streaming_off = false;
-                getMoodButton.Text = StringConst.Mood;
+                isResultScreen = false;
+                cameraBox.ResumeCamera();
+                getMoodButton.BackgroundImage = Properties.Resources.take_picture;
             }
-        }
-
-        private void Streaming(Object sender, System.EventArgs e)
-        {
-            if (streaming_off) return;
-            var img = capture.QueryFrame().ToImage<Bgr, byte>();
-            var bmp = img.Bitmap;
-            analisedImageBox.Image = bmp;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "JPEG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|GIF (*.gif)|*.gif";
-            saveFileDialog.FileName = StringConst.Capture;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                ImageFormat saveFormat;
-                switch(saveFileDialog.FilterIndex) 
-                {
-                    case 1 :
-                        saveFormat = ImageFormat.Jpeg;
-                        break;
-
-                    case 2 :
-                        saveFormat = ImageFormat.Bmp;
-                        break;
-
-                    case 3 :
-                        saveFormat = ImageFormat.Gif;
-                        break;
-
-                    default:
-                        goto case 1;
-                }
-                analisedImageBox.Image.Save(saveFileDialog.FileName, saveFormat);
-            }
+            saveDialog.Save(analyzedImageBox);
         }
     }
 }

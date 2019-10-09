@@ -75,6 +75,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmazonRekognitionApi.cs" />
+    <Compile Include="BoundingBoxPainter.cs" />
+    <Compile Include="BoundingBoxPainterWindows.cs" />
+    <Compile Include="CameraBox.cs" />
+    <Compile Include="Interfaces\ICamera.cs" />
+    <Compile Include="ImageUploadDialog.cs" />
+    <Compile Include="Interfaces\IImageSaver.cs" />
+    <Compile Include="SaveFileDialog.cs" />
     <Compile Include="ImageLinkToMemStream.cs" />
     <Compile Include="IRegex.cs" />
     <Compile Include="MBWindow.cs">
@@ -85,8 +92,9 @@
     <Compile Include="MBWindow.Designer.cs">
       <DependentUpon>MBWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="IErrorHandler.cs" />
-    <Compile Include="IRecognitionApi.cs" />
+    <Compile Include="Interfaces\IErrorHandler.cs" />
+    <Compile Include="Interfaces\IRecognitionApi.cs" />
+    <Compile Include="Mood.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexStringCheck.cs" />
@@ -97,6 +105,7 @@
     </Compile>
     <EmbeddedResource Include="MBWindow.resx">
       <DependentUpon>MBWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -106,6 +115,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="StringConst.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -128,6 +138,18 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.Rekognition.3.3.101.15\analyzers\dotnet\cs\AWSSDK.Rekognition.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\take_picture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
