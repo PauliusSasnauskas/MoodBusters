@@ -39,7 +39,7 @@ namespace Mood_Busters
                 Path.AddArc(x, dY - d, d, d, 90, 90);
                 Path.AddLine(x, dY - d, x, y+r);
                 Path.AddArc(x, y, d, d, 180, 90);
-                return Path;
+                return Path; 
             }
 
             GraphicsPath path = DrawRoundedRectangle( 
