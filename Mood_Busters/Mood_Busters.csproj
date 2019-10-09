@@ -83,7 +83,6 @@
     <Compile Include="Interfaces\IImageSaver.cs" />
     <Compile Include="SaveFileDialog.cs" />
     <Compile Include="ImageLinkToMemStream.cs" />
-    <Compile Include="IRegex.cs" />
     <Compile Include="MBWindow.cs">
       <SubType>Form</SubType>
     </Compile>
