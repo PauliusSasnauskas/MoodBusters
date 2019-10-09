@@ -83,6 +83,7 @@
     <Compile Include="Interfaces\IImageSaver.cs" />
     <Compile Include="SaveFileDialog.cs" />
     <Compile Include="ImageLinkToMemStream.cs" />
+    <Compile Include="IRegex.cs" />
     <Compile Include="MBWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +97,7 @@
     <Compile Include="Mood.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegexStringCheck.cs" />
     <Compile Include="StringConst.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -12,12 +12,14 @@ namespace Mood_Busters
         private ICameraBox cameraBox;
         private IImageSaver saveDialog;
         public static IErrorHandler errorHandler = new ErrorHandlerWindows();
+        private IRegex regexChecker;
         private MemoryStream memStream;
-
+        
         public MBWindow()
         {
             InitializeComponent();      
             apiClient = new AmazonRekognitionApi();
+            regexChecker = new RegexStringCheck();
             saveDialog = new SaveFileDialog();
             cameraBox = new CameraBox(analyzedImageBox);
         }
