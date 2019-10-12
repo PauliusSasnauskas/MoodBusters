@@ -1,8 +1,6 @@
-using MoodBustersLibrary;
-
-namespace Mood_Busters
+namespace MoodBustersLibrary
 {
-    class ErrorHandlerAndroid : IErrorHandler
+    public class ErrorHandlerAndroid : IErrorHandler
     {
         public void ShowError(string errorText, string errorName = "Error")
         {

@@ -2,6 +2,7 @@
 using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 using Amazon.Runtime;
+using MoodBustersLibrary;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

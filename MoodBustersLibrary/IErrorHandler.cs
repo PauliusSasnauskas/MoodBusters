@@ -1,4 +1,4 @@
-namespace Mood_Busters
+namespace MoodBustersLibrary
 {
     public interface IErrorHandler
     {
