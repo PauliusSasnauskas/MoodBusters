@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MoodBustersLibrary;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Mood_Busters

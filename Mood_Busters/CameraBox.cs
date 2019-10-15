@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using MoodBustersLibrary;
 
 namespace Mood_Busters
 {

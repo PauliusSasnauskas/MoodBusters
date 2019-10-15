@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
+using MoodBustersLibrary;
 
 namespace Mood_Busters
 {

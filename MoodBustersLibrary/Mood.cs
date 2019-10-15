@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mood_Busters
+namespace MoodBustersLibrary
 {
     /// <summary>
     /// Enum to unify all defining moods of a response.
