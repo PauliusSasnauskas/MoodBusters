@@ -13,7 +13,8 @@ namespace Mood_Busters
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MBWindow());
+            string url = System.Configuration.ConfigurationManager.AppSettings["webServiceUrl"];
+            Application.Run(new MBWindow(new WebRequestRecognitionApi(url)));
 
         }
     }

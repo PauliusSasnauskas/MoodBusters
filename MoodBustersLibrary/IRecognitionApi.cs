@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MoodBustersLibrary
 {
@@ -8,6 +9,6 @@ namespace MoodBustersLibrary
     /// </summary>
     public interface IRecognitionApi
     {
-        List<Mood> GetMoods(MemoryStream memStr);
+        Task<List<Mood>> GetMoodsAsync(MemoryStream memStr);
     }
 }

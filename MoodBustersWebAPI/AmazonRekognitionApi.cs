@@ -8,13 +8,15 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace Mood_Busters
+namespace MoodBustersWebAPI
 {
     class AmazonRekognitionApi : IRecognitionApi
     {
         private AmazonRekognitionClient apiClient;
-		private IErrorHandler errorHandler = MBWindow.errorHandler;
+        //TODO: fix errorhandler
+		//private IErrorHandler errorHandler = MBWindow.errorHandler;
         public AmazonRekognitionApi()
         {
             try
@@ -27,7 +29,8 @@ namespace Mood_Busters
             }
             catch (Exception)
             {
-                errorHandler.HandleAndExit(StringConst.ErrLicenceNotFound, StringConst.ErrLicense);
+                //TODO: fix errorhandler
+                //errorHandler.HandleAndExit(StringConst.ErrLicenceNotFound, StringConst.ErrLicense);
             }
         }
 
@@ -36,7 +39,7 @@ namespace Mood_Busters
         /// </summary>
         /// <param name="memStr"></param>
         /// <returns></returns>
-        public List<Mood> GetMoods(MemoryStream memStr)
+        public async Task<List<Mood>> GetMoodsAsync(MemoryStream memStr)
         {
             Image image = new Image();
             image.Bytes = memStr;
@@ -49,7 +52,8 @@ namespace Mood_Busters
 
             try
             {
-                DetectFacesResponse detectFacesResponse = apiClient.DetectFaces(detectFacesRequest);
+                //DetectFacesResponse detectFacesResponse = apiClient.DetectFaces(detectFacesRequest);
+                DetectFacesResponse detectFacesResponse = await apiClient.DetectFacesAsync(detectFacesRequest);
 
                 // List<Mood> es = detectFacesResponse.FaceDetails.Select((face) =>
                 //     NormalizeEmotion(face.Emotions.OrderByDescending(em => em.Confidence).First(), face.BoundingBox)
@@ -65,7 +69,8 @@ namespace Mood_Busters
             }
             catch (Exception e)
             {
-                errorHandler.ShowError(e.Message);
+                //TODO: fix errorhandler
+                //errorHandler.ShowError(e.Message);
             }
             return null;
         }
