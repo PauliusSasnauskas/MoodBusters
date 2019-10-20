@@ -6,8 +6,6 @@ namespace MoodBustersWebAPI
 {
     public static class WebApiConfig
     {
-        public static IRecognitionApi recognitionApi { get; } = new AmazonRekognitionApi();
-
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
