@@ -9,6 +9,6 @@ namespace MoodBustersLibrary
     /// </summary>
     public interface IRecognitionApi
     {
-        Task<List<Mood>> GetMoodsAsync(MemoryStream memStr);
+        Task<IEnumerable<Mood>> GetMoodsAsync(MemoryStream memStr);
     }
 }

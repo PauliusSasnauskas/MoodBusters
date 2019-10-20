@@ -5,10 +5,10 @@ using Amazon.Runtime;
 using MoodBustersLibrary;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 
 namespace MoodBustersWebAPI
 {
@@ -22,13 +22,15 @@ namespace MoodBustersWebAPI
             try
             {
                 var credentials = new BasicAWSCredentials(
-                    ConfigurationManager.AppSettings.Get("Key0"),
-                    ConfigurationManager.AppSettings.Get("Key1")
+                    WebConfigurationManager.AppSettings["Key0"],
+                    WebConfigurationManager.AppSettings["Key1"]
                 );
                 apiClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("Whoops!");
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 //TODO: fix errorhandler
                 //errorHandler.HandleAndExit(StringConst.ErrLicenceNotFound, StringConst.ErrLicense);
             }
@@ -39,7 +41,7 @@ namespace MoodBustersWebAPI
         /// </summary>
         /// <param name="memStr"></param>
         /// <returns></returns>
-        public async Task<List<Mood>> GetMoodsAsync(MemoryStream memStr)
+        public async Task<IEnumerable<Mood>> GetMoodsAsync(MemoryStream memStr)
         {
             Image image = new Image();
             image.Bytes = memStr;

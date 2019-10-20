@@ -31,16 +31,13 @@ namespace Mood_Busters
 
         private async Task updateFromImageAsync(MemoryStream stream)
         {
-            List<Mood> moods = await apiClient.GetMoodsAsync(stream);
-            if (moods == null)
-            {
-                return;
-            }
+            // TODO: Show progress indicator
+            List<Mood> moods = await apiClient.GetMoodsAsync(stream) as List<Mood>;
+            if (moods == null) return;
             BoundingBoxPainter painter = new BoundingBoxPainterWindows(stream);
             painter.PaintAll(moods);
             analyzedImageBox.Image = painter.Image;
-
-            //moods.ForEach(mood => moodLabel.Text += mood.ToString() + '\n');
+            // TODO: Hide loading indicator
         }
 
         private void UploadButton_Click(object sender, EventArgs e)

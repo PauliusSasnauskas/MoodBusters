@@ -15,14 +15,19 @@ namespace Mood_Busters
             BaseUrl = baseUrl;
         }
 
-        public async Task<List<Mood>> GetMoodsAsync(MemoryStream memStr)
+        public async Task<IEnumerable<Mood>> GetMoodsAsync(MemoryStream memStr)
         {
             HttpClient client = new HttpClient() { BaseAddress = new Uri(BaseUrl) };
             HttpRequestMessage msg = new HttpRequestMessage(HttpMethod.Post, "mood");
             msg.Content = new ByteArrayContent(memStr.ToArray());
-            var result = client.SendAsync(msg).Result;
-            Console.WriteLine(result.ToString());
-            return new List<Mood>(await result.Content.ReadAsAsync<Mood[]>());
+            var response = client.SendAsync(msg);
+            if (response == null)
+            {
+                Console.WriteLine("Error?");
+                return null;
+            }
+            var responseStream = response.Result.Content as StreamContent;
+            return new List<Mood>(await response.Result.Content.ReadAsAsync<Mood[]>());
         }
     }
 }
