@@ -5,29 +5,34 @@ using Amazon.Runtime;
 using MoodBustersLibrary;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Configuration;
 
-namespace Mood_Busters
+namespace MoodBustersWebAPI
 {
     class AmazonRekognitionApi : IRecognitionApi
     {
         private AmazonRekognitionClient apiClient;
-		private IErrorHandler errorHandler = MBWindow.errorHandler;
+        //TODO: fix errorhandler
+		//private IErrorHandler errorHandler = MBWindow.errorHandler;
         public AmazonRekognitionApi()
         {
             try
             {
                 var credentials = new BasicAWSCredentials(
-                    ConfigurationManager.AppSettings.Get("Key0"),
-                    ConfigurationManager.AppSettings.Get("Key1")
+                    WebConfigurationManager.AppSettings["Key0"],
+                    WebConfigurationManager.AppSettings["Key1"]
                 );
                 apiClient = new AmazonRekognitionClient(credentials, RegionEndpoint.EUCentral1);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                errorHandler.HandleAndExit(StringConst.ErrLicenceNotFound, StringConst.ErrLicense);
+                System.Diagnostics.Debug.WriteLine("Whoops!");
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                //TODO: fix errorhandler
+                //errorHandler.HandleAndExit(StringConst.ErrLicenceNotFound, StringConst.ErrLicense);
             }
         }
 
@@ -36,7 +41,7 @@ namespace Mood_Busters
         /// </summary>
         /// <param name="memStr"></param>
         /// <returns></returns>
-        public List<Mood> GetMoods(MemoryStream memStr)
+        public async Task<IEnumerable<Mood>> GetMoodsAsync(MemoryStream memStr)
         {
             Image image = new Image();
             image.Bytes = memStr;
@@ -49,7 +54,8 @@ namespace Mood_Busters
 
             try
             {
-                DetectFacesResponse detectFacesResponse = apiClient.DetectFaces(detectFacesRequest);
+                //DetectFacesResponse detectFacesResponse = apiClient.DetectFaces(detectFacesRequest);
+                DetectFacesResponse detectFacesResponse = await apiClient.DetectFacesAsync(detectFacesRequest);
 
                 // List<Mood> es = detectFacesResponse.FaceDetails.Select((face) =>
                 //     NormalizeEmotion(face.Emotions.OrderByDescending(em => em.Confidence).First(), face.BoundingBox)
@@ -65,7 +71,8 @@ namespace Mood_Busters
             }
             catch (Exception e)
             {
-                errorHandler.ShowError(e.Message);
+                //TODO: fix errorhandler
+                //errorHandler.ShowError(e.Message);
             }
             return null;
         }

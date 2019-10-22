@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
 using MoodBustersLibrary;
+using System.Threading.Tasks;
 
 namespace Mood_Busters
 {
@@ -15,10 +16,10 @@ namespace Mood_Busters
         public static IErrorHandler errorHandler = new ErrorHandlerWindows();
         private MemoryStream memStream;
         
-        public MBWindow()
+        public MBWindow(IRecognitionApi apiClient)
         {
-            InitializeComponent();      
-            apiClient = new AmazonRekognitionApi();
+            InitializeComponent();
+            this.apiClient = apiClient;
             saveDialog = new SaveFileDialog();
             cameraBox = new CameraBox(analyzedImageBox);
         }
@@ -28,18 +29,15 @@ namespace Mood_Busters
             Application.Idle += cameraBox.StreamFrames;
         }
 
-        private void updateFromImage(MemoryStream stream)
+        private async Task updateFromImageAsync(MemoryStream stream)
         {
-            List<Mood> moods = apiClient.GetMoods(stream);
-            if (moods == null)
-            {
-                return;
-            }
+            // TODO: Show progress indicator
+            List<Mood> moods = await apiClient.GetMoodsAsync(stream) as List<Mood>;
+            if (moods == null) return;
             BoundingBoxPainter painter = new BoundingBoxPainterWindows(stream);
             painter.PaintAll(moods);
             analyzedImageBox.Image = painter.Image;
-
-            //moods.ForEach(mood => moodLabel.Text += mood.ToString() + '\n');
+            // TODO: Hide loading indicator
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
@@ -49,7 +47,7 @@ namespace Mood_Busters
                 isResultScreen = true;
                 getMoodButton.BackgroundImage = Properties.Resources.resume;
                 cameraBox.StopCamera();
-                updateFromImage(memStream);
+                updateFromImageAsync(memStream);
             }
             else return;
         }
@@ -65,7 +63,7 @@ namespace Mood_Busters
                 memStream = new MemoryStream();
                 analyzedImageBox.Image.Save(memStream, ImageFormat.Jpeg);
                 cameraBox.StopCamera();
-                updateFromImage(memStream);
+                updateFromImageAsync(memStream);
             }
             else
             {
