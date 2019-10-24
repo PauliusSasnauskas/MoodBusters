@@ -5,8 +5,7 @@ namespace MoodBustersLibrary
 {
     public static class ImageLinkToMemStream
     {
-
-        public static MemoryStream ToStream(this string imageLocation)
+        public static Func<string, MemoryStream> ToStream = imageLocation =>
         {
             try
             {
@@ -20,8 +19,8 @@ namespace MoodBustersLibrary
             }
             catch (Exception)
             {
-                return null;      
+                return null;
             }
-        }
+        };
     }
 }
