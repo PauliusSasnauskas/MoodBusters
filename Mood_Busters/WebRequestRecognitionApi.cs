@@ -20,14 +20,18 @@ namespace Mood_Busters
             HttpClient client = new HttpClient() { BaseAddress = new Uri(BaseUrl) };
             HttpRequestMessage msg = new HttpRequestMessage(HttpMethod.Post, "mood");
             msg.Content = new ByteArrayContent(memStr.ToArray());
-            var response = client.SendAsync(msg);
-            if (response == null)
+            try
             {
-                Console.WriteLine("Error?");
+               var response = client.SendAsync(msg);
+               var responseStream = response.Result.Content as StreamContent;
+               return new List<Mood>(await response.Result.Content.ReadAsAsync<Mood[]>());
+            }
+            catch
+            {
+                MBWindow.errorHandler.ShowError(StringConst.ErrNull);
                 return null;
             }
-            var responseStream = response.Result.Content as StreamContent;
-            return new List<Mood>(await response.Result.Content.ReadAsAsync<Mood[]>());
+            
         }
     }
 }

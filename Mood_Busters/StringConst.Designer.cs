@@ -106,6 +106,15 @@ namespace Mood_Busters {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Null Pointer Excepsion.
+        /// </summary>
+        internal static string ErrNull {
+            get {
+                return ResourceManager.GetString("ErrNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error processing.
         /// </summary>
         internal static string ErrProccesing {
