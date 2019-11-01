@@ -48,18 +48,17 @@ namespace AndroMooda3
 
             //string[] cameraList = ;
 
-
             foreach (string s in cameraManager.GetCameraIdList())
             {
                 cameraCharacteristics = cameraManager.GetCameraCharacteristics(s);
-                if (cameraCharacteristics.Get(CameraCharacteristics.LensFacing).Equals(LensFacing.Front))
+                camId = s;
+                if (cameraCharacteristics.Get(CameraCharacteristics.LensFacing).Equals(LensFacing.Front))   //probably doesn't work
                 {
-                    camId = s;
                     break;
                 }
             }
 
-            if (string.IsNullOrEmpty(camId)) return;
+            if (camId == null || camId == "") return;
 
             //StreamConfigurationMap map = camChar.Get(CameraCharacteristics.ScalerStreamConfigurationMap) as StreamConfigurationMap;
             //Size size = map.GetOutputSizes(256)[0];
