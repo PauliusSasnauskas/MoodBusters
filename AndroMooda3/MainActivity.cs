@@ -10,14 +10,18 @@ using Android.Util;
 using Android.Hardware.Camera2.Params;
 using Android.Hardware;
 using Android.Graphics;
+using Android.Support.Design.Widget;
+using System;
 
 namespace AndroMooda3
 {
+
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        public TextureView cameraTextureView;
-        private CameraDevice.StateCallback stateListener;
+        public const int REQUEST_CAMERA = 102;
+        public RelativeLayout rootView;
+        private CameraImplementation CameraV;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -26,81 +30,28 @@ namespace AndroMooda3
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
-            CameraManager cameraManager = (CameraManager)GetSystemService(CameraService);
+            rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
 
-            string camId = "";
-
-            new List<string>(cameraManager.GetCameraIdList()).ForEach((s) =>
-            {
-                if (cameraManager.GetCameraCharacteristics(s).Get(CameraCharacteristics.LensFacing).Equals(0))
-                {
-                    camId = s;
-                }
-            });
-
-            if (camId.Equals("")) return;
-
-            CameraCharacteristics cc = cameraManager.GetCameraCharacteristics(camId);
-            StreamConfigurationMap map = cc.Get(CameraCharacteristics.ScalerStreamConfigurationMap) as StreamConfigurationMap;
-            Size size = map.GetOutputSizes(256)[0];
-
-            Surface aaa = new Surface(cameraTextureView.SurfaceTexture);
-            stateListener = new MyStateListener(aaa);
-
-            cameraManager.OpenCamera(camId, stateListener, null);
-
-
-
+            TextureView cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
+            CameraV = new CameraImplementation(this, cameraTextureView, rootView);
+            CameraV.Start();
         }
+
+        internal CameraManager GetCameraManager(string cameraService)
+        {
+            return GetSystemService(cameraService) as CameraManager;
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
+            if (requestCode == REQUEST_CAMERA)
+            {
+                CameraV.tryCamera();
+            }
+
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
-        public class MyStateListener : CameraDevice.StateCallback
-        {
-            Surface sf;
-            public MyStateListener(Surface sf)
-            {
-                this.sf = sf;
-            }
-
-            public override void OnDisconnected(CameraDevice camera)
-            {
-                camera.Close();
-            }
-
-            public override void OnError(CameraDevice camera, [GeneratedEnum] Android.Hardware.Camera2.CameraError error)
-            {
-                Log.Verbose("bib", error.ToString());
-            }
-
-            public override void OnOpened(CameraDevice camera)
-            {
-                List<OutputConfiguration> loc = new List<OutputConfiguration>();
-                loc.Add(new OutputConfiguration(sf));
-                SessionConfiguration cfg = new SessionConfiguration(0, loc, AsyncTask.ThreadPoolExecutor, new MyStateCallback());
-                camera.CreateCaptureSession(cfg);
-            }
-        }
-
-        public class MyStateCallback : CameraCaptureSession.StateCallback
-        {
-            public override void OnConfigured(CameraCaptureSession session)
-            {
-                Log.Verbose("bib", session.ToString());
-                //throw new System.NotImplementedException();
-            }
-
-            public override void OnConfigureFailed(CameraCaptureSession session)
-            {
-                Log.Verbose("bib", "error: " + session.ToString());
-            }
-        }
-    }
-
-    
+    }    
 }
