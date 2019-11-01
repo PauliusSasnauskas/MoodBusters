@@ -21,7 +21,7 @@ namespace AndroMooda3
     {
         public const int REQUEST_CAMERA = 102;
         public RelativeLayout rootView;
-        private CameraImplementation CameraV;
+        private Camera2 camera;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,8 +33,8 @@ namespace AndroMooda3
             rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
 
             TextureView cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
-            CameraV = new CameraImplementation(this, cameraTextureView, rootView);
-            CameraV.Start();
+            camera = new Camera2(this, cameraTextureView, rootView);
+            camera.Start();
         }
 
         internal CameraManager GetCameraManager(string cameraService)
@@ -48,7 +48,7 @@ namespace AndroMooda3
 
             if (requestCode == REQUEST_CAMERA)
             {
-                CameraV.tryCamera();
+                camera.TryCamera();
             }
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);

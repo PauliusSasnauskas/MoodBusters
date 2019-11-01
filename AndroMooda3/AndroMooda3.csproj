@@ -64,7 +64,10 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CameraImplementation.cs" />
+    <Compile Include="Camera2\Callbacks\CameraCaptureSessionCallback.cs" />
+    <Compile Include="Camera2\Callbacks\CameraDeviceCallback.cs" />
+    <Compile Include="Camera2\Camera2.cs" />
+    <Compile Include="Camera2\Listeners\Camera2SurfaceTextureListener.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

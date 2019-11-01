@@ -6,19 +6,19 @@ namespace AndroMooda3.Callbacks
 {
     public class CameraCaptureSessionCallback : CameraCaptureSession.StateCallback
     {
-        private MainActivity activity;
-        private CameraImplementation ci;
+        private readonly MainActivity activity;
+        private readonly Camera2 camera;
 
-        public CameraCaptureSessionCallback(MainActivity activity, CameraImplementation ci)
+        public CameraCaptureSessionCallback(MainActivity activity, Camera2 camera)
         {
             this.activity = activity;
-            this.ci = ci;
+            this.camera = camera;
         }
 
         public override void OnConfigured(CameraCaptureSession session)
         {
-            ci.captureRequestBuilder.Set(CaptureRequest.ControlMode, 1);
-            session.SetRepeatingRequest(ci.captureRequestBuilder.Build(), null, null);
+            camera.captureRequestBuilder.Set(CaptureRequest.ControlMode, 1);
+            session.SetRepeatingRequest(camera.captureRequestBuilder.Build(), null, null);
         }
 
         public override void OnConfigureFailed(CameraCaptureSession session)

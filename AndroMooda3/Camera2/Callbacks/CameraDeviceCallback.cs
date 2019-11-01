@@ -1,29 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using System.Collections.Generic;
 using Android.Hardware.Camera2;
 using Android.Hardware.Camera2.Params;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
-using Android.Widget;
 
 namespace AndroMooda3.Callbacks
 {
     public class CameraDeviceCallback : CameraDevice.StateCallback
     {
-        private Surface surface;
-        private MainActivity activity;
-        private CameraImplementation ci;
+        private readonly Surface surface;
+        private readonly MainActivity activity;
+        private readonly Camera2 camera;
 
-        public CameraDeviceCallback(MainActivity activity, CameraImplementation ci, Surface surface)
+        public CameraDeviceCallback(MainActivity activity, Camera2 camera, Surface surface)
         {
-            this.ci = ci;
+            this.camera = camera;
             this.surface = surface;
             this.activity = activity;
         }
@@ -40,12 +33,11 @@ namespace AndroMooda3.Callbacks
 
         public override void OnOpened(CameraDevice camera)
         {
-            List<OutputConfiguration> loc = new List<OutputConfiguration>();
-            loc.Add(new OutputConfiguration(surface));
-            SessionConfiguration cfg = new SessionConfiguration(0, loc, AsyncTask.ThreadPoolExecutor, new CameraCaptureSessionCallback(activity, ci));
+            List<OutputConfiguration> OutputConfigList = new List<OutputConfiguration>{ new OutputConfiguration(surface) };
+            SessionConfiguration cfg = new SessionConfiguration(0, OutputConfigList, AsyncTask.ThreadPoolExecutor, new CameraCaptureSessionCallback(activity, this.camera));
             camera.CreateCaptureSession(cfg);
-            ci.captureRequestBuilder = camera.CreateCaptureRequest(CameraTemplate.Preview);
-            ci.captureRequestBuilder.AddTarget(surface);
+            this.camera.captureRequestBuilder = camera.CreateCaptureRequest(CameraTemplate.Preview);
+            this.camera.captureRequestBuilder.AddTarget(surface);
         }
     }
     }
