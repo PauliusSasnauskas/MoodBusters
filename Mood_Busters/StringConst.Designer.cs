@@ -106,7 +106,7 @@ namespace Mood_Busters {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Null Pointer Excepsion.
+        ///   Looks up a localized string similar to Null Pointer Exception.
         /// </summary>
         internal static string ErrNull {
             get {

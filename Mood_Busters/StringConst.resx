@@ -134,7 +134,7 @@
     <value>Failed to load file </value>
   </data>
   <data name="ErrNull" xml:space="preserve">
-    <value>Null Pointer Excepsion</value>
+    <value>Null Pointer Exception</value>
   </data>
   <data name="ErrProccesing" xml:space="preserve">
     <value>Error processing</value>
