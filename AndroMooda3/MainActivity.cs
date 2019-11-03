@@ -12,29 +12,40 @@ using Android.Hardware;
 using Android.Graphics;
 using Android.Support.Design.Widget;
 using System;
+using Android.Support.V4.Content;
+using Android;
+using Android.Content.PM;
+using System.Threading.Tasks;
 
 namespace AndroMooda3
 {
-
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        public const int REQUEST_CAMERA = 102;
-        public RelativeLayout rootView;
+        public const int REQUEST_CAMERA = 100;
+        public LinearLayout rootView;
         private Camera2 camera;
+        private TextureView cameraTextureView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            // Set our view from the "main" layout resource
+
             SetContentView(Resource.Layout.activity_main);
 
-            rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
+            rootView = FindViewById<LinearLayout>(Resource.Id.rootView);
 
-            TextureView cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != Permission.Granted)
+            {
+                this.RequestPermissions(new string[] { Manifest.Permission.Camera }, REQUEST_CAMERA);
+            }
+
+            cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
             camera = new Camera2(this, cameraTextureView, rootView);
-            camera.Start();
+            Log.Verbose("bib", camera.GetFrontCameraId());
+
+            camera.StartPreview(cameraTextureView);
         }
 
         internal CameraManager GetCameraManager(string cameraService)
@@ -45,13 +56,15 @@ namespace AndroMooda3
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             if (requestCode == REQUEST_CAMERA)
             {
-                camera.TryCamera();
+                if (grantResults[0].Equals(Permission.Denied)) 
+                {
+                    System.Environment.Exit(0);
+                }
             }
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }    
 }

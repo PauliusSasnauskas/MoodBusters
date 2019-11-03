@@ -1,5 +1,6 @@
 ﻿using Android;
 using Android.Content;
+using Android.Graphics;
 using Android.Hardware.Camera2;
 using Android.Hardware.Camera2.Params;
 using Android.Support.Design.Widget;
@@ -16,72 +17,63 @@ namespace AndroMooda3
     public class Camera2 : IDisposable
     {
         private readonly MainActivity activity;
-        private readonly TextureView textureView;
-        private readonly RelativeLayout rootView;
+        //private readonly TextureView textureView;
+        private readonly LinearLayout rootView;
         public CaptureRequest.Builder captureRequestBuilder;
-        private Surface surface;
+        //private Surface surface;
         private CameraManager cameraManager;
-        CameraCharacteristics cameraCharacteristics;
-        private string camId = string.Empty;
+        private CameraCharacteristics cameraCharacteristics;
 
-        public Camera2(MainActivity activity, TextureView textureView, RelativeLayout rootView)
+
+        public Camera2(MainActivity activity, TextureView textureView, LinearLayout rootView)
         {
             this.activity = activity;
-            this.textureView = textureView;
+            //this.textureView = textureView;
             this.rootView = rootView;
         }
 
-        public void Start()
+        public string GetFrontCameraId()
+        {
+            cameraManager = activity.GetCameraManager(Context.CameraService);
+
+            foreach (string s in cameraManager.GetCameraIdList())
+            {
+                cameraCharacteristics = cameraManager.GetCameraCharacteristics(s);        //obtained camera characteristics
+                if (cameraCharacteristics.Get(CameraCharacteristics.LensFacing).Equals((int)LensFacing.Front))          //get front facing camera
+                {
+                    return s;
+                }
+            }
+
+            Snackbar.Make(rootView, "Could not find front facing camera", Snackbar.LengthLong).Show();
+            return null;
+
+            //TODO: Create Exception "Front camera not found"
+        }
+
+        public void StartPreview(TextureView textureView)
         {
             textureView.SurfaceTextureListener = new Camera2SurfaceTextureListener(activity, this);
         }
 
-        public void OpenCamera()
+        public void OpenCamera(Surface surface)
         {
-            cameraManager.OpenCamera(camId, new CameraDeviceCallback(activity, this, surface), null);
+            string camId;
+            try
+            {
+                camId = GetFrontCameraId();
+                cameraManager.OpenCamera(camId, new CameraDeviceCallback(activity, this, surface), null);
+            }
+            catch (Exception)
+            {
+                Snackbar.Make(rootView, "Front camera not available", Snackbar.LengthShort).Show();
+            }
         }
 
+        //StreamConfigurationMap map = camChar.Get(CameraCharacteristics.ScalerStreamConfigurationMap) as StreamConfigurationMap;
+        //Size size = map.GetOutputSizes(256)[0];
 
-        public void TryCamera()
-        {
-            cameraManager = activity.GetCameraManager(Context.CameraService);
-
-            //string[] cameraList = ;
-
-            foreach (string s in cameraManager.GetCameraIdList())
-            {
-                cameraCharacteristics = cameraManager.GetCameraCharacteristics(s);
-                camId = s;
-                if (cameraCharacteristics.Get(CameraCharacteristics.LensFacing).Equals(LensFacing.Front))   //probably doesn't work
-                {
-                    break;
-                }
-            }
-
-            if (camId == null || camId == "") return;
-
-            //StreamConfigurationMap map = camChar.Get(CameraCharacteristics.ScalerStreamConfigurationMap) as StreamConfigurationMap;
-            //Size size = map.GetOutputSizes(256)[0];
-
-            if (!textureView.IsAvailable)
-            {
-                Snackbar.Make(rootView, "Surface view not available", Snackbar.LengthShort).Show();
-                return; 
-            }
-
-            surface = new Surface(textureView.SurfaceTexture);
-
-
-            if (ContextCompat.CheckSelfPermission(activity, Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
-            {
-                activity.RequestPermissions(new string[] { Manifest.Permission.Camera }, MainActivity.REQUEST_CAMERA);
-                return;
-            }
-
-            OpenCamera();
-        }
-
-        public void Dispose() 
+        public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
@@ -89,9 +81,9 @@ namespace AndroMooda3
 
         protected virtual void Dispose(bool b)
         {
-            if (b) 
+            if (b)
             {
-                surface.Dispose();
+                //surface.Dispose();
                 cameraManager.Dispose();
                 cameraCharacteristics.Dispose();
                 return;
