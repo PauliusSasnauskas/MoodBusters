@@ -64,10 +64,13 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Camera2\Callbacks\CameraCaptureSessionCallback.cs" />
+    <Compile Include="Camera2\Callbacks\CameraCaptureSessionCaptureCallback.cs" />
+    <Compile Include="Camera2\Callbacks\CameraCaptureSessionStateCallbackPicture.cs" />
+    <Compile Include="Camera2\Callbacks\CameraCaptureSessionStateCallback.cs" />
     <Compile Include="Camera2\Callbacks\CameraDeviceCallback.cs" />
-    <Compile Include="Camera2\Camera2.cs" />
+    <Compile Include="Camera2\Camera2Impl.cs" />
     <Compile Include="Camera2\Listeners\Camera2SurfaceTextureListener.cs" />
+    <Compile Include="Camera2\Listeners\CameraImageAvailableListener.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

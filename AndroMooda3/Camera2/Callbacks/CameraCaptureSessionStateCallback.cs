@@ -7,9 +7,9 @@ namespace AndroMooda3.Callbacks
     public class CameraCaptureSessionCallback : CameraCaptureSession.StateCallback
     {
         private readonly MainActivity activity;
-        private readonly Camera2 camera;
+        private readonly Camera2Impl camera;
 
-        public CameraCaptureSessionCallback(MainActivity activity, Camera2 camera)
+        public CameraCaptureSessionCallback(MainActivity activity, Camera2Impl camera)
         {
             this.activity = activity;
             this.camera = camera;

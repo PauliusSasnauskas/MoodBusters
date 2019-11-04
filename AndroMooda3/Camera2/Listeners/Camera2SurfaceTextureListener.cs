@@ -1,16 +1,15 @@
 ﻿using Android.Graphics;
 using Android.Support.Design.Widget;
 using Android.Views;
-using System.Threading.Tasks;
 
 namespace AndroMooda3.Listeners
 {
     public class Camera2SurfaceTextureListener : Java.Lang.Object, TextureView.ISurfaceTextureListener
     {
-        private readonly Camera2 camera;
+        private readonly Camera2Impl camera;
         private readonly MainActivity mainActivity;
 
-        public Camera2SurfaceTextureListener(MainActivity mainActivity, Camera2 camera)
+        public Camera2SurfaceTextureListener(MainActivity mainActivity, Camera2Impl camera)
         {
             this.camera = camera;
             this.mainActivity = mainActivity;

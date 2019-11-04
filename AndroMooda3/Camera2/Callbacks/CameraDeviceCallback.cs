@@ -12,9 +12,9 @@ namespace AndroMooda3.Callbacks
     {
         private readonly Surface surface;
         private readonly MainActivity activity;
-        private readonly Camera2 camera;
+        private readonly Camera2Impl camera;
 
-        public CameraDeviceCallback(MainActivity activity, Camera2 camera, Surface surface)
+        public CameraDeviceCallback(MainActivity activity, Camera2Impl camera, Surface surface)
         {
             this.camera = camera;
             this.surface = surface;
@@ -33,6 +33,7 @@ namespace AndroMooda3.Callbacks
 
         public override void OnOpened(CameraDevice camera)
         {
+            this.camera.cameraDevice = camera;
             List<OutputConfiguration> OutputConfigList = new List<OutputConfiguration>{ new OutputConfiguration(surface) };
             SessionConfiguration cfg = new SessionConfiguration(0, OutputConfigList, AsyncTask.ThreadPoolExecutor, new CameraCaptureSessionCallback(activity, this.camera));
             camera.CreateCaptureSession(cfg);

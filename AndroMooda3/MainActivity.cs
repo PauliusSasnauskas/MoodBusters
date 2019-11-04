@@ -5,17 +5,9 @@ using Android.Runtime;
 using Android.Widget;
 using Android.Views;
 using Android.Hardware.Camera2;
-using System.Collections.Generic;
-using Android.Util;
-using Android.Hardware.Camera2.Params;
-using Android.Hardware;
-using Android.Graphics;
-using Android.Support.Design.Widget;
-using System;
 using Android.Support.V4.Content;
 using Android;
 using Android.Content.PM;
-using System.Threading.Tasks;
 
 namespace AndroMooda3
 {
@@ -24,7 +16,7 @@ namespace AndroMooda3
     {
         public const int REQUEST_CAMERA = 100;
         public LinearLayout rootView;
-        private Camera2 camera;
+        private Camera2Impl camera;
         private TextureView cameraTextureView;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -38,14 +30,19 @@ namespace AndroMooda3
 
             if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != Permission.Granted)
             {
-                this.RequestPermissions(new string[] { Manifest.Permission.Camera }, REQUEST_CAMERA);
+                RequestPermissions(new string[] { Manifest.Permission.Camera }, REQUEST_CAMERA);
             }
 
             cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
-            camera = new Camera2(this, cameraTextureView, rootView);
-            Log.Verbose("bib", camera.GetFrontCameraId());
-
+            camera = new Camera2Impl(this, cameraTextureView, rootView);
+            //Log.Verbose("bib", camera.FrontCameraId);
             camera.StartPreview(cameraTextureView);
+
+            Button button = FindViewById<Button>(Resource.Id.buttonTry);
+
+            button.Click += delegate {
+                camera.TakePicture();
+            };
         }
 
         internal CameraManager GetCameraManager(string cameraService)
