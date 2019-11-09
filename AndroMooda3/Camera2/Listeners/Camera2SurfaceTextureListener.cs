@@ -6,18 +6,21 @@ namespace AndroMooda3.Listeners
 {
     public class Camera2SurfaceTextureListener : Java.Lang.Object, TextureView.ISurfaceTextureListener
     {
-        private readonly Camera2Impl camera;
         private readonly MainActivity mainActivity;
+        public delegate void SurfaceMethod(Surface surface);
+        private event SurfaceMethod surfaceMethod;
 
-        public Camera2SurfaceTextureListener(MainActivity mainActivity, Camera2Impl camera)
+        /// <param name="mainActivity"></param>
+        /// <param name="surfaceMethod"> Method that has a surface as a parameter. </param>
+        public Camera2SurfaceTextureListener(MainActivity mainActivity, SurfaceMethod surfaceMethod = null)
         {
-            this.camera = camera;
             this.mainActivity = mainActivity;
+            this.surfaceMethod += surfaceMethod;
         }
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height)
         {
-            camera.OpenCamera(new Surface(surfaceTexture));
+            surfaceMethod?.Invoke(new Surface(surfaceTexture));
         }
 
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface) => false;

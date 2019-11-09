@@ -8,6 +8,7 @@ using Android.Hardware.Camera2;
 using Android.Support.V4.Content;
 using Android;
 using Android.Content.PM;
+using System;
 
 namespace AndroMooda3
 {
@@ -35,12 +36,12 @@ namespace AndroMooda3
 
             cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
             camera = new Camera2Impl(this, cameraTextureView, rootView);
-            //Log.Verbose("bib", camera.FrontCameraId);
             camera.StartPreview(cameraTextureView);
 
             Button button = FindViewById<Button>(Resource.Id.buttonTry);
 
-            button.Click += delegate {
+            button.Click += delegate
+            {
                 camera.TakePicture();
             };
         }
@@ -50,7 +51,7 @@ namespace AndroMooda3
             return GetSystemService(cameraService) as CameraManager;
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
