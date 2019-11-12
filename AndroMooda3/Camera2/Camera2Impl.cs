@@ -21,7 +21,6 @@ namespace AndroMooda3
         private readonly TextureView textureView;
         private readonly View rootView;
         public CaptureRequest.Builder captureRequestBuilder;
-        //private Surface surface;
         private CameraManager cameraManager;
         private CameraCharacteristics cameraCharacteristics;
         private string _FrontCameraId = null;
@@ -165,7 +164,7 @@ namespace AndroMooda3
 
         public void StartPreview(TextureView textureView)
         {
-            textureView.SurfaceTextureListener = new Camera2SurfaceTextureListener(activity, this);
+            textureView.SurfaceTextureListener = new Camera2SurfaceTextureListener(activity, OpenCamera);
         }
 
         public void OpenCamera(Surface surface)
