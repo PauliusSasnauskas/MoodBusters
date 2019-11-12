@@ -5,6 +5,7 @@ using Android.Media;
 using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Views;
+using Android.Widget;
 using AndroMooda3.Callbacks;
 using AndroMooda3.Listeners;
 using Java.IO;
@@ -94,7 +95,6 @@ namespace AndroMooda3
                     return s;
                 }
             }
-
             Snackbar.Make(rootView, "Could not find front facing camera", Snackbar.LengthLong).Show();
             return null;
 
@@ -152,8 +152,16 @@ namespace AndroMooda3
             reader.SetOnImageAvailableListener(new CameraImageAvailableListener(file), null);
             CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSessionCaptureCallback(rootView, file, this);
 
-            cameraDevice.CreateCaptureSession(outputSurfaces, new CameraCaptureSessionCallbackPicture(activity, this as Camera2Impl, captureBuilder, captureListener), null);
+            var ccscc = new CameraCaptureSessionCallbackPicture(activity, this as Camera2Impl);
+            ccscc.OnConfiguredEvent += (session) =>
+            {
+                session.Capture(captureBuilder.Build(), captureListener, null);
+            };
+            
+
+            cameraDevice.CreateCaptureSession(outputSurfaces, ccscc, null);
         }
+
 
         public void StartPreview(TextureView textureView)
         {
@@ -162,10 +170,9 @@ namespace AndroMooda3
 
         public void OpenCamera(Surface surface)
         {
-            string camId;
             try
             {
-                camId = FrontCameraId;
+                string camId = FrontCameraId;
                 cameraManager.OpenCamera(camId, new CameraDeviceCallback(activity, this, surface), null);
             }
             catch (Exception)

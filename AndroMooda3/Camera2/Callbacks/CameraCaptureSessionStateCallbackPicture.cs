@@ -11,19 +11,21 @@ namespace AndroMooda3.Callbacks
         private readonly CaptureRequest.Builder builder;
         private readonly CameraCaptureSession.CaptureCallback callback;
 
-        public CameraCaptureSessionCallbackPicture(MainActivity activity, Camera2Impl camera, CaptureRequest.Builder builder, CameraCaptureSession.CaptureCallback callback)
+        public delegate void ConfiguredDelegate(CameraCaptureSession session);
+        public event ConfiguredDelegate OnConfiguredEvent;
+
+        public CameraCaptureSessionCallbackPicture(MainActivity activity, Camera2Impl camera)
         {
             this.activity = activity;
             this.camera = camera;
-            this.builder = builder;
-            this.callback = callback;
         }
 
         public override void OnConfigured(CameraCaptureSession session)
         {
             try
             {
-                session.Capture(builder.Build(), callback, null);
+                OnConfiguredEvent(session);
+                //session.Capture(builder.Build(), callback, null);
             }
             catch (CameraAccessException e)
             {
