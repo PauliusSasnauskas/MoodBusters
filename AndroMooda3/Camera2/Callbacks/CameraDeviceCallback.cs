@@ -33,6 +33,11 @@ namespace AndroMooda3.Callbacks
 
         public override void OnOpened(CameraDevice camera)
         {
+            if (camera == null)
+            {
+                Snackbar.Make(activity.rootView, "No camera device found.", Snackbar.LengthShort).Show();
+                return;
+            }
             this.camera.cameraDevice = camera;
             List<OutputConfiguration> OutputConfigList = new List<OutputConfiguration>{ new OutputConfiguration(surface) };
             SessionConfiguration cfg = new SessionConfiguration(0, OutputConfigList, AsyncTask.ThreadPoolExecutor, new CameraCaptureSessionCallback(activity, this.camera));
