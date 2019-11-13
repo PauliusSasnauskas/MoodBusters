@@ -77,5 +77,24 @@ namespace Mood_Busters
         {
             saveDialog.Save(analyzedImageBox);
         }
+
+        private void configButton_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.color_bool)
+            {
+                Properties.Settings.Default.R2 = 221;
+                Properties.Settings.Default.G2 = 64;
+                Properties.Settings.Default.B2 = 64;
+                Properties.Settings.Default.A2 = 237;
+                Properties.Settings.Default.color_bool = !Properties.Settings.Default.color_bool;
+            }
+            else {
+                Properties.Settings.Default.R2 = 180;
+                Properties.Settings.Default.G2 = 180;
+                Properties.Settings.Default.B2 = 255;
+                Properties.Settings.Default.A2 = 255;
+                Properties.Settings.Default.color_bool = !Properties.Settings.Default.color_bool;
+            }
+        }
     }
 }

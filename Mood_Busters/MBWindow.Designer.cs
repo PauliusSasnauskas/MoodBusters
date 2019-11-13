@@ -32,6 +32,7 @@
             this.uploadButton = new System.Windows.Forms.Button();
             this.getMoodButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.configButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.analyzedImageBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,12 +86,23 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // configButton
+            // 
+            this.configButton.Location = new System.Drawing.Point(12, 438);
+            this.configButton.Name = "configButton";
+            this.configButton.Size = new System.Drawing.Size(131, 33);
+            this.configButton.TabIndex = 8;
+            this.configButton.Text = "Configure Button";
+            this.configButton.UseVisualStyleBackColor = true;
+            this.configButton.Click += new System.EventHandler(this.configButton_Click);
+            // 
             // MBWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(430, 575);
+            this.Controls.Add(this.configButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.getMoodButton);
             this.Controls.Add(this.uploadButton);
@@ -111,6 +123,7 @@
         private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.Button getMoodButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button configButton;
     }
 }
 
