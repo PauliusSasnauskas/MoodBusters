@@ -6,11 +6,17 @@ namespace Mood_Busters
 {
     public class ErrorHandlerWindows : IErrorHandler
     {
-        void GenericMethod<T>(ref T eT, ref T eR)
+        public void GenericMethod<T>(ref T eT, ref T eR) //Generic Method
         {
-            MessageBox.Show(eT.ToString(), eR.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            T errorText = eT;
+            T errorName = eR;
+            MessageBox.Show(errorText.ToString(), errorName.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
+        public delegate string GenericDelegate<TT>(TT function); //Generic Delegate
+        public static string SimpleDelegate(string text)
+        {
+            return text;
+        }
         public void ShowError(string errorText, string errorName = "Error")
         {
             //MessageBox.Show(errorText, errorName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -19,7 +25,10 @@ namespace Mood_Busters
 
         public void HandleAndExit(string errorText, string errorName = "Error")
         {
-            ShowError(errorText, errorName);
+            GenericDelegate<string> errorDelegate = new GenericDelegate<string>(SimpleDelegate);           
+
+            ShowError(errorDelegate(errorText), errorDelegate(errorName));
+            //ShowError(errorText,errorName) //Now uses Generic Delegates to print out the error
             Environment.Exit(0);
         }
     }
