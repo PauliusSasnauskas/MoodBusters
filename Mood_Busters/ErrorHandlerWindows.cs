@@ -19,16 +19,16 @@ namespace Mood_Busters
         }
         public void ShowError(string errorText, string errorName = "Error")
         {
-            //MessageBox.Show(errorText, errorName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             GenericMethod(ref errorText, ref errorName); //Now uses Generic Method to print out the same thing
+            //MessageBox.Show(errorText, errorName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public void HandleAndExit(string errorText, string errorName = "Error")
         {
             GenericDelegate<string> errorDelegate = new GenericDelegate<string>(SimpleDelegate);           
 
-            ShowError(errorDelegate(errorText), errorDelegate(errorName));
-            //ShowError(errorText,errorName) //Now uses Generic Delegates to print out the error
+            ShowError(errorDelegate(errorText), errorDelegate(errorName));  //Now uses Generic Delegates to print out the error
+            //ShowError(errorText,errorName)
             Environment.Exit(0);
         }
     }
