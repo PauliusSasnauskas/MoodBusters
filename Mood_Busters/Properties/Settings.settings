@@ -14,8 +14,5 @@
     <Setting Name="A2" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">255</Value>
     </Setting>
-    <Setting Name="color_bool" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

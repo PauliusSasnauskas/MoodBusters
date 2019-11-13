@@ -70,17 +70,5 @@ namespace Mood_Busters.Properties {
                 this["A2"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool color_bool {
-            get {
-                return ((bool)(this["color_bool"]));
-            }
-            set {
-                this["color_bool"] = value;
-            }
-        }
     }
 }
