@@ -6,7 +6,7 @@ namespace Mood_Busters
 {
     public class ErrorHandlerWindows : IErrorHandler
     {
-        public void GenericMethod<T>(ref T eT, ref T eR) //Generic Method
+        public void GenericMethod<T>(T eT, T eR) //Generic Method
         {
             T errorText = eT;
             T errorName = eR;
@@ -19,7 +19,7 @@ namespace Mood_Busters
         }
         public void ShowError(string errorText, string errorName = "Error")
         {
-            GenericMethod(ref errorText, ref errorName); //Now uses Generic Method to print out the same thing
+            GenericMethod(errorText, errorName); //Now uses Generic Method to print out the same thing
             //MessageBox.Show(errorText, errorName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
