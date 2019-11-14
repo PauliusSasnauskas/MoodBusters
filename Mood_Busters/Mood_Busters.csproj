@@ -83,6 +83,7 @@
     <Compile Include="BoundingBoxPainter.cs" />
     <Compile Include="BoundingBoxPainterWindows.cs" />
     <Compile Include="CameraBox.cs" />
+    <Compile Include="DatabaseConnection.cs" />
     <Compile Include="ImageUploadDialog.cs" />
     <Compile Include="Interfaces\IImageSaver.cs" />
     <Compile Include="SaveFileDialog.cs" />

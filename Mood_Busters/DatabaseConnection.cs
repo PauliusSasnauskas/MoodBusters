@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -10,12 +11,9 @@ namespace Mood_Busters
 {
     public static class DatabaseConnection
     {
-        private static string save_dataURL = "http://ingvarasgalinskas.000webhostapp.com/mood_busters/save_data.php";
-        private static string load_dataURL = "http://ingvarasgalinskas.000webhostapp.com/mood_busters/load_data.php";
-
         public static void SaveData(string mood, string date_time, string location)
         {
-            string urlAddress = save_dataURL;
+            string urlAddress = ConfigurationManager.AppSettings["save_dataURL"];
 
             using (WebClient client = new WebClient())
             {
@@ -31,7 +29,7 @@ namespace Mood_Busters
 
         public static string LoadData(string id)
         {
-            string urlAddress = load_dataURL;
+            string urlAddress = ConfigurationManager.AppSettings["load_dataURL"];
 
             using (WebClient client = new WebClient())
             {

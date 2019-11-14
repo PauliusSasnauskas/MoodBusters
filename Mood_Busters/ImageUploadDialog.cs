@@ -15,10 +15,14 @@ namespace Mood_Busters
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
+                if(Properties.Settings.Default.LoadingPath != null)
+                    dialog.InitialDirectory = Properties.Settings.Default.LoadingPath;
                 dialog.Filter = StringConst.Filter + " | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     string imageLocation = dialog.FileName;
+                    Properties.Settings.Default.LoadingPath = imageLocation.Substring(0, imageLocation.LastIndexOf(@"\"));
+                    Properties.Settings.Default.Save();
                     return imageLocation.ToStream();
                 }
                 else

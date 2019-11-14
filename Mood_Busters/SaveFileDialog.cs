@@ -1,4 +1,5 @@
-﻿using System.Drawing.Imaging;
+﻿using System;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace Mood_Busters
@@ -8,6 +9,8 @@ namespace Mood_Busters
         public void Save(PictureBox pictureBox)
         {
             System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            if (Properties.Settings.Default.SavingPath != null)
+                saveFileDialog.InitialDirectory = Properties.Settings.Default.SavingPath;
             System.Windows.Forms.SaveFileDialog aba = new System.Windows.Forms.SaveFileDialog();
 
             saveFileDialog.Filter = "JPEG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|GIF (*.gif)|*.gif";
@@ -29,6 +32,9 @@ namespace Mood_Busters
                     default:
                         goto case 1;
                 }
+
+                Properties.Settings.Default.SavingPath = saveFileDialog.FileName.Substring(0, saveFileDialog.FileName.LastIndexOf(@"\"));
+                Properties.Settings.Default.Save();
                 pictureBox.Image.Save(saveFileDialog.FileName, saveFormat);
             }
         }

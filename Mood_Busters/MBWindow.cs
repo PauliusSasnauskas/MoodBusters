@@ -34,6 +34,7 @@ namespace Mood_Busters
             // TODO: Show progress indicator
             List<Mood> moods = await apiClient.GetMoodsAsync(stream) as List<Mood>;
             if (moods == null) return;
+			//Properties.Settings.Default.LastMood = String.Join(", ", moods.ToArray()); 
             BoundingBoxPainter painter = new BoundingBoxPainterWindows(stream);
             painter.PaintAll(moods);
             analyzedImageBox.Image = painter.Image;

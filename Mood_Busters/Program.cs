@@ -15,7 +15,6 @@ namespace Mood_Busters
             Application.SetCompatibleTextRenderingDefault(false);
             string url = System.Configuration.ConfigurationManager.AppSettings["webServiceUrl"];
             Application.Run(new MBWindow(new WebRequestRecognitionApi(url)));
-
         }
     }
 }
