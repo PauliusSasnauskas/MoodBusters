@@ -16,9 +16,11 @@ namespace AndroMooda3
     public class MainActivity : AppCompatActivity
     {
         public const int REQUEST_CAMERA = 100;
-        public LinearLayout rootView;
+        public View rootView;
         private Camera2Impl camera;
         private TextureView cameraTextureView;
+        private ImageButton mCaptureButton;
+        private ImageButton mCloseButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,7 +29,7 @@ namespace AndroMooda3
 
             SetContentView(Resource.Layout.activity_main);
 
-            rootView = FindViewById<LinearLayout>(Resource.Id.rootView);
+            rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
 
             if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != Permission.Granted)
             {
@@ -35,15 +37,22 @@ namespace AndroMooda3
             }
 
             cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
-            camera = new Camera2Impl(this, cameraTextureView, rootView);
+            camera = new Camera2Impl(this, cameraTextureView, rootView, () =>
+            {
+                mCaptureButton.Visibility = ViewStates.Gone;
+                mCloseButton.Visibility = ViewStates.Visible;
+            }, () =>
+            {
+                mCloseButton.Visibility = ViewStates.Gone;
+                mCaptureButton.Visibility = ViewStates.Visible;
+            });
             camera.StartPreview(cameraTextureView);
 
-            Button button = FindViewById<Button>(Resource.Id.buttonTry);
+            mCaptureButton = FindViewById<ImageButton>(Resource.Id.button_capture);
+            mCloseButton = FindViewById<ImageButton>(Resource.Id.button_close);
 
-            button.Click += delegate
-            {
-                camera.TakePicture();
-            };
+            mCaptureButton.Click += async (e, v) => camera.TakePicture();
+            mCloseButton.Click += (e, v) => camera.ResumePreview();
         }
 
         internal CameraManager GetCameraManager(string cameraService)

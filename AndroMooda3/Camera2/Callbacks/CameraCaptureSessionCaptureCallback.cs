@@ -20,16 +20,15 @@ namespace AndroMooda3.Callbacks
         private readonly View v;
         private readonly File f;
         private readonly Camera2Impl camera;
-        public CameraCaptureSessionCaptureCallback(View v, File f, Camera2Impl camera)
+        public CameraCaptureSessionCaptureCallback(View v, Camera2Impl camera)
         {
             this.v = v;
-            this.f = f;
             this.camera = camera;
         }
         public override void OnCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result)
         {
             base.OnCaptureCompleted(session, request, result);
-            Snackbar.Make(v, "Saved as: " + f.AbsolutePath, Snackbar.LengthShort).Show();
+            Snackbar.Make(v, "Saved.", Snackbar.LengthShort).Show();
             camera.ShowImagePreview();
         }
     }

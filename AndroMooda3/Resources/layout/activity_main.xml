@@ -1,5 +1,4 @@
-
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:minWidth="25px"
@@ -10,11 +9,24 @@
     <TextureView
         android:id="@+id/cameraTextureView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-    <Button
-        android:id="@+id/buttonTry"
-        android:text="Try"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="match_parent" />
+    
+    <ImageButton
+        android:id="@+id/button_close"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/close"
+        android:visibility="gone"
+        android:layout_margin="16dp" />
+    
+    <ImageButton
+        android:id="@+id/button_capture"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/camera_iris"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

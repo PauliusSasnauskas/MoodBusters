@@ -1,16 +1,16 @@
 ﻿using Android.Content;
+using Android.Graphics;
 using Android.Hardware.Camera2;
 using Android.Hardware.Camera2.Params;
 using Android.Media;
 using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 using AndroMooda3.Callbacks;
 using AndroMooda3.Listeners;
-using Java.IO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Orientation = Android.Media.Orientation;
 
 namespace AndroMooda3
@@ -20,11 +20,19 @@ namespace AndroMooda3
         private readonly MainActivity activity;
         private readonly TextureView textureView;
         private readonly View rootView;
+        private readonly PreviewCallback showPreviewInterface;
+        private readonly PreviewCallback hidePreviewInterface;
         public CaptureRequest.Builder captureRequestBuilder;
         private CameraManager cameraManager;
         private CameraCharacteristics cameraCharacteristics;
         private string _FrontCameraId = null;
         internal CameraDevice cameraDevice;
+        internal CameraCaptureSession session;
+
+        //private readonly string LOG_TAG = "Camera2Impl";
+
+        private int mWidth;
+        private int mHeight;
 
         public string FrontCameraId {
             get {
@@ -39,47 +47,61 @@ namespace AndroMooda3
             }
         }
 
+        public delegate void PreviewCallback();
 
-        public void ShowImagePreview()
+        internal void ShowImagePreview()
         {
-            // TODO: implement
-        //    try
-        //    {
-        //        SurfaceTexture texture = textureView.getSurfaceTexture();
-        //        assert texture != null;
-        //        texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
-        //        Surface surface = new Surface(texture);
-        //        captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-        //        captureRequestBuilder.addTarget(surface);
-        //        cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback(){
-                //@Override
-                //public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession)
-                //        {
-                //            //The camera is already closed
-                //            if (null == cameraDevice)
-                //            {
-                //                return;
-                //            }
-                //            // When the session is ready, we start displaying the preview.
-                //            cameraCaptureSessions = cameraCaptureSession;
-                //            updatePreview();
-                //        }
-                //        @Override
-                //                public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession)
-                //        {
-                //            Toast.makeText(AndroidCameraApi.this, "Configuration change", Toast.LENGTH_SHORT).show();
-                //        }
-                //}, null);
-                //} catch (CameraAccessException e) {
-                //         e.printStackTrace();
-                //}
+            // show something to user
+            // and call ResumePreview
+            showPreviewInterface();
         }
 
-        public Camera2Impl(MainActivity activity, TextureView textureView, View rootView)
+        public void ResumePreview()
+        {
+            hidePreviewInterface();
+            try
+            {
+                SurfaceTexture texture = textureView.SurfaceTexture;
+                texture.SetDefaultBufferSize(mWidth, mHeight);
+                Surface surface = new Surface(texture);
+                captureRequestBuilder = cameraDevice.CreateCaptureRequest(CameraTemplate.Preview);
+                captureRequestBuilder.AddTarget(surface);
+                List<Surface> surfaces = new List<Surface>
+                {
+                    surface
+                };
+                cameraDevice.CreateCaptureSession(surfaces, new CaptureSessionCallbackPreview(this, activity), null);
+            }
+            catch (CameraAccessException e)
+            {
+                e.PrintStackTrace();
+            }
+        }
+
+        internal void ContinuePreview()
+        {
+            if (null == cameraDevice)
+            {
+                Snackbar.Make(activity.rootView, "App error: cannot show preview.", Snackbar.LengthShort).Show();
+            }
+            captureRequestBuilder.Set(CaptureRequest.ControlMode, (int)ControlMode.Auto);
+            try
+            {
+                session.SetRepeatingRequest(captureRequestBuilder.Build(), null, null);
+            }
+            catch (CameraAccessException e)
+            {
+                e.PrintStackTrace();
+            }
+        }
+
+        public Camera2Impl(MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface)
         {
             this.activity = activity;
             this.textureView = textureView;
             this.rootView = rootView;
+            this.showPreviewInterface = showPreviewInterface;
+            this.hidePreviewInterface = hidePreviewInterface;
         }
 
         private string GetFrontCameraId()
@@ -104,6 +126,7 @@ namespace AndroMooda3
         {
             if (cameraDevice == null)
             {
+                Snackbar.Make(activity.rootView, "Cannot take picture; no camera detected", Snackbar.LengthShort).Show();
                 // TODO: Throw exception
             }
             CameraCharacteristics characteristics = cameraManager.GetCameraCharacteristics(FrontCameraId);
@@ -118,6 +141,8 @@ namespace AndroMooda3
             {
                 width = jpegSizes[0].Width;
                 height = jpegSizes[0].Height;
+                mWidth = width;
+                mHeight = height;
             }
             ImageReader reader = ImageReader.NewInstance(width, height, Android.Graphics.ImageFormatType.Jpeg, 1);
             List<Surface> outputSurfaces = new List<Surface>(2)
@@ -128,7 +153,7 @@ namespace AndroMooda3
             CaptureRequest.Builder captureBuilder = cameraDevice.CreateCaptureRequest(CameraTemplate.StillCapture);
             captureBuilder.AddTarget(reader.Surface);
             captureBuilder.Set(CaptureRequest.ControlMode, (int)ControlMode.Auto);
-            
+
             SurfaceOrientation rotation = activity.WindowManager.DefaultDisplay.Rotation;
             Orientation orientation = 0;
             switch (rotation)
@@ -147,19 +172,21 @@ namespace AndroMooda3
                     break;
             }
             captureBuilder.Set(CaptureRequest.JpegOrientation, (int)orientation);
-            /* final */ File file = new File(Android.OS.Environment.ExternalStorageDirectory + "/pic.jpg");
-            reader.SetOnImageAvailableListener(new CameraImageAvailableListener(file), null);
-            CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSessionCaptureCallback(rootView, file, this);
+
+            reader.SetOnImageAvailableListener(new CameraImageAvailableListener(), null);
+            CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSessionCaptureCallback(rootView, this);
 
             var ccscc = new CameraCaptureSessionCallbackPicture(activity, this as Camera2Impl);
             ccscc.OnConfiguredEvent += (session) =>
             {
                 session.Capture(captureBuilder.Build(), captureListener, null);
             };
-            
+
 
             cameraDevice.CreateCaptureSession(outputSurfaces, ccscc, null);
         }
+
+
 
 
         public void StartPreview(TextureView textureView)

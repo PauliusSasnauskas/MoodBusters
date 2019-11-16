@@ -22,6 +22,7 @@ namespace AndroMooda3.Callbacks
                 // TODO: fix something if camera null
                 Snackbar.Make(activity.rootView, "Camera is null", Snackbar.LengthShort).Show();
             }
+            camera.session = session;
             camera.captureRequestBuilder.Set(CaptureRequest.ControlMode, 1);
             session.SetRepeatingRequest(camera.captureRequestBuilder.Build(), null, null);
         }

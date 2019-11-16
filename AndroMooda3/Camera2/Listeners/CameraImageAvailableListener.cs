@@ -1,19 +1,14 @@
 ﻿using Android.Media;
 using Android.Util;
-using Java.IO;
 using Java.Nio;
+using System;
+using System.IO;
 
 namespace AndroMooda3.Listeners
 {
     class CameraImageAvailableListener : Java.Lang.Object, ImageReader.IOnImageAvailableListener
     {
         private static readonly string LOG_TAG = "Camera2/CameraImageAvailableListener";
-        private File file;
-
-        public CameraImageAvailableListener(File file)
-        {
-            this.file = file;
-        }
 
         public void OnImageAvailable(ImageReader reader)
         {
@@ -30,7 +25,7 @@ namespace AndroMooda3.Listeners
             {
                 Log.Verbose(LOG_TAG, "File not found, " + e.Message);
             }
-            catch (System.IO.IOException e)
+            catch (IOException e)
             {
                 Log.Verbose(LOG_TAG, "IO Exception, " + e.Message);
             }
@@ -44,15 +39,14 @@ namespace AndroMooda3.Listeners
         }
         private void save(byte[] bytes)
         {
-            OutputStream output = null;
-			try {
-                output = new FileOutputStream(file);
-                output.Write(bytes);
-            } finally {
-                if (null != output)
-                {
-                    output.Close();
-                }
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string filename = Path.Combine(path, "pic.jpg");
+
+            using (var thing = File.Create(filename))
+            {
+                thing.Write(bytes, 0, bytes.Length);
+                thing.Flush();
+                thing.Close();
             }
         }
     }
