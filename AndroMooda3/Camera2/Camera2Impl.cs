@@ -11,6 +11,7 @@ using AndroMooda3.Listeners;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MoodBustersLibrary;
 using Orientation = Android.Media.Orientation;
 
 namespace AndroMooda3
@@ -28,6 +29,7 @@ namespace AndroMooda3
         private string _FrontCameraId = null;
         internal CameraDevice cameraDevice;
         internal CameraCaptureSession session;
+        private IErrorHandler errorHandler;
 
         //private readonly string LOG_TAG = "Camera2Impl";
 
@@ -82,7 +84,7 @@ namespace AndroMooda3
         {
             if (null == cameraDevice)
             {
-                Snackbar.Make(activity.rootView, "App error: cannot show preview.", Snackbar.LengthShort).Show();
+                errorHandler.ShowError("App error: cannot show preview.");
             }
             captureRequestBuilder.Set(CaptureRequest.ControlMode, (int)ControlMode.Auto);
             try
@@ -95,8 +97,9 @@ namespace AndroMooda3
             }
         }
 
-        public Camera2Impl(MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface)
+        public Camera2Impl(IErrorHandler errorHandler, MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface)
         {
+            this.errorHandler = errorHandler;
             this.activity = activity;
             this.textureView = textureView;
             this.rootView = rootView;
@@ -116,7 +119,7 @@ namespace AndroMooda3
                     return s;
                 }
             }
-            Snackbar.Make(rootView, "Could not find front facing camera", Snackbar.LengthLong).Show();
+            errorHandler.ShowError("Could not find front facing camera");
             return null;
 
             // TODO: Create Exception "Front camera not found"
@@ -126,7 +129,7 @@ namespace AndroMooda3
         {
             if (cameraDevice == null)
             {
-                Snackbar.Make(activity.rootView, "Cannot take picture; no camera detected", Snackbar.LengthShort).Show();
+                errorHandler.ShowError("Cannot take picture; no camera detected");
                 // TODO: Throw exception
             }
             CameraCharacteristics characteristics = cameraManager.GetCameraCharacteristics(FrontCameraId);
@@ -182,12 +185,8 @@ namespace AndroMooda3
                 session.Capture(captureBuilder.Build(), captureListener, null);
             };
 
-
             cameraDevice.CreateCaptureSession(outputSurfaces, ccscc, null);
         }
-
-
-
 
         public void StartPreview(TextureView textureView)
         {
@@ -203,7 +202,7 @@ namespace AndroMooda3
             }
             catch (Exception)
             {
-                Snackbar.Make(rootView, "Front camera not available", Snackbar.LengthShort).Show();
+                errorHandler.ShowError("Front camera not available");
             }
         }
 

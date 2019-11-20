@@ -1,7 +1,7 @@
 ﻿using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     class SaveFileDialog : IImageSaver
     {

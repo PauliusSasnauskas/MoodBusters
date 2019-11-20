@@ -21,7 +21,7 @@ namespace AndroMooda3.Listeners
                 buffer.Get(bytes);
                 save(bytes);
             }
-            catch (System.IO.FileNotFoundException e)
+            catch (FileNotFoundException e)
             {
                 Log.Verbose(LOG_TAG, "File not found, " + e.Message);
             }

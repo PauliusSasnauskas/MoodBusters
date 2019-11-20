@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mood_Busters.Properties {
+namespace AndroMooda3.Properties {
     using System;
     
     

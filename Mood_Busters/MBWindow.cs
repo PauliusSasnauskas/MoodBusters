@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Drawing;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     public partial class MBWindow : Form
     {

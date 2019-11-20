@@ -1,4 +1,4 @@
-﻿namespace Mood_Busters
+﻿namespace AndroMooda3
 { 
     partial class MBWindow
     {
@@ -50,7 +50,7 @@
             // 
             // uploadButton
             // 
-            this.uploadButton.BackgroundImage = global::Mood_Busters.Properties.Resources.browse;
+            this.uploadButton.BackgroundImage = global::AndroMooda3.Properties.Resources.browse;
             this.uploadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.uploadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.uploadButton.ForeColor = System.Drawing.Color.Black;
@@ -64,7 +64,7 @@
             // 
             // getMoodButton
             // 
-            this.getMoodButton.BackgroundImage = global::Mood_Busters.Properties.Resources.take_picture;
+            this.getMoodButton.BackgroundImage = global::AndroMooda3.Properties.Resources.take_picture;
             this.getMoodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.getMoodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.getMoodButton.ForeColor = System.Drawing.Color.Black;
@@ -77,7 +77,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.BackgroundImage = global::Mood_Busters.Properties.Resources.save;
+            this.saveButton.BackgroundImage = global::AndroMooda3.Properties.Resources.save;
             this.saveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.Color.Black;

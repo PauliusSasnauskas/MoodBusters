@@ -91,7 +91,6 @@
     <Compile Include="MBWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ErrorHandlerAndroid.cs" />
     <Compile Include="ErrorHandlerWindows.cs" />
     <Compile Include="MBWindow.Designer.cs">
       <DependentUpon>MBWindow.cs</DependentUpon>

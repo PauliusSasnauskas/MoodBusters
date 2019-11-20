@@ -21,6 +21,8 @@ namespace AndroMooda3
         private TextureView cameraTextureView;
         private ImageButton mCaptureButton;
         private ImageButton mCloseButton;
+        private Button errorButton;
+        private ErrorHandlerAndroid errorHandler;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,6 +30,7 @@ namespace AndroMooda3
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_main);
+            errorHandler = new ErrorHandlerAndroid(this);
 
             rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
 
@@ -50,6 +53,9 @@ namespace AndroMooda3
 
             mCaptureButton = FindViewById<ImageButton>(Resource.Id.button_capture);
             mCloseButton = FindViewById<ImageButton>(Resource.Id.button_close);
+            errorButton = FindViewById<Button>(Resource.Id.error_button);
+
+            errorButton.Click += delegate { errorHandler.ShowError("Error Handler Works!!"); };
 
             mCaptureButton.Click += async (e, v) => camera.TakePicture();
             mCloseButton.Click += (e, v) => camera.ResumePreview();

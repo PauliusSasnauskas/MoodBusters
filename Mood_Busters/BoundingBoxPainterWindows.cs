@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     class BoundingBoxPainterWindows : BoundingBoxPainter
     {
@@ -23,7 +23,6 @@ namespace Mood_Busters
                 );
 
             Brush = new SolidBrush(MyColor);
-            //BrushFont = new SolidBrush(Color.FromArgb(255, 180, 180, 255));
             BrushFont = new SolidBrush(MyColor);
         }
 

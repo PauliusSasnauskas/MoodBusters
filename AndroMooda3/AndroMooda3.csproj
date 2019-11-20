@@ -73,6 +73,7 @@
     <Compile Include="Camera2\Callbacks\CaptureSessionCallbackPreview.cs" />
     <Compile Include="Camera2\Listeners\Camera2SurfaceTextureListener.cs" />
     <Compile Include="Camera2\Listeners\CameraImageAvailableListener.cs" />
+    <Compile Include="ErrorHandlerAndroid.cs" />
     <Compile Include="WebRequestRecognitionApi.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
