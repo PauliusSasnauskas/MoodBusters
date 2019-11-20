@@ -3,12 +3,19 @@ using Android.Util;
 using Java.Nio;
 using System;
 using System.IO;
+using static AndroMooda3.Camera2Impl;
 
 namespace AndroMooda3.Listeners
 {
     class CameraImageAvailableListener : Java.Lang.Object, ImageReader.IOnImageAvailableListener
     {
         private static readonly string LOG_TAG = "Camera2/CameraImageAvailableListener";
+        private readonly PictureCallback pictureTaken;
+
+        public CameraImageAvailableListener(PictureCallback pictureTaken)
+        {
+            this.pictureTaken = pictureTaken;
+        }
 
         public void OnImageAvailable(ImageReader reader)
         {
@@ -19,7 +26,7 @@ namespace AndroMooda3.Listeners
                 ByteBuffer buffer = image.GetPlanes()[0].Buffer;
                 byte[] bytes = new byte[buffer.Capacity()];
                 buffer.Get(bytes);
-                save(bytes);
+                Save(bytes);
             }
             catch (FileNotFoundException e)
             {
@@ -37,17 +44,9 @@ namespace AndroMooda3.Listeners
                 }
             }
         }
-        private void save(byte[] bytes)
+        private void Save(byte[] bytes)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            string filename = Path.Combine(path, "pic.jpg");
-
-            using (var thing = File.Create(filename))
-            {
-                thing.Write(bytes, 0, bytes.Length);
-                thing.Flush();
-                thing.Close();
-            }
+            pictureTaken(bytes);
         }
     }
 }

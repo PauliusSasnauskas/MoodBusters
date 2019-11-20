@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MoodBustersLibrary;
-using Newtonsoft.Json;
+using Org.Json;
 
 public class WebRequestRecognitionApi : IRecognitionApi
 {
@@ -38,6 +38,20 @@ public class WebRequestRecognitionApi : IRecognitionApi
     {
         List<Mood> moods = new List<Mood>();
         //thing
+        JSONArray a = new JSONArray(responseString);
+        for (int i = 0, n = a.Length(); i < n; i++)
+        {
+            JSONObject o = a.GetJSONObject(i);
+            moods.Add(new Mood
+            {
+                Name = (MoodName)o.GetInt("Name"),
+                Confidence = (float)o.GetDouble("Confidence"),
+                Top = (float)o.GetDouble("Top"),
+                Left = (float)o.GetDouble("Left"),
+                Width = (float)o.GetDouble("Width"),
+                Height = (float)o.GetDouble("Height")
+            });
+        }
         return moods;
     }
 }
