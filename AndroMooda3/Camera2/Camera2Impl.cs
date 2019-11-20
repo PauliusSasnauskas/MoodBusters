@@ -22,6 +22,7 @@ namespace AndroMooda3
         private readonly View rootView;
         private readonly PreviewCallback showPreviewInterface;
         private readonly PreviewCallback hidePreviewInterface;
+        private readonly PictureCallback pictureTaken;
         public CaptureRequest.Builder captureRequestBuilder;
         private CameraManager cameraManager;
         private CameraCharacteristics cameraCharacteristics;
@@ -48,6 +49,7 @@ namespace AndroMooda3
         }
 
         public delegate void PreviewCallback();
+        public delegate void PictureCallback(byte[] bytes);
 
         internal void ShowImagePreview()
         {
@@ -95,13 +97,14 @@ namespace AndroMooda3
             }
         }
 
-        public Camera2Impl(MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface)
+        public Camera2Impl(MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface, PictureCallback pictureTaken)
         {
             this.activity = activity;
             this.textureView = textureView;
             this.rootView = rootView;
             this.showPreviewInterface = showPreviewInterface;
             this.hidePreviewInterface = hidePreviewInterface;
+            this.pictureTaken = pictureTaken;
         }
 
         private string GetFrontCameraId()
@@ -173,7 +176,7 @@ namespace AndroMooda3
             }
             captureBuilder.Set(CaptureRequest.JpegOrientation, (int)orientation);
 
-            reader.SetOnImageAvailableListener(new CameraImageAvailableListener(), null);
+            reader.SetOnImageAvailableListener(new CameraImageAvailableListener(pictureTaken), null);
             CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSessionCaptureCallback(rootView, this);
 
             var ccscc = new CameraCaptureSessionCallbackPicture(activity, this as Camera2Impl);
