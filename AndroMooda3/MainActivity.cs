@@ -17,10 +17,12 @@ using Android.Support.Design.Widget;
 using Android.Util;
 using Javax.Net.Ssl;
 using Java.Security;
+using Plugin.CurrentActivity;
 
 namespace AndroMooda3
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [ErrorAspect]
     public class MainActivity : AppCompatActivity
     {
         public const int REQUEST_CAMERA = 100;
@@ -53,12 +55,15 @@ namespace AndroMooda3
             } 
         } 
 
+        [ErrorAspect]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_main);
+            CrossCurrentActivity.Current.Init(this.Application);
+
             errorHandler = new ErrorHandlerAndroid(this);
 
             rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
@@ -69,7 +74,7 @@ namespace AndroMooda3
             }
 
             cameraTextureView = FindViewById<TextureView>(Resource.Id.cameraTextureView);
-            camera = new Camera2Impl(this, cameraTextureView, rootView, () =>
+            camera = new Camera2Impl(errorHandler, this, cameraTextureView, rootView, () =>
             {
                 mCaptureButton.Visibility = ViewStates.Gone;
                 mCloseButton.Visibility = ViewStates.Visible;
@@ -102,7 +107,10 @@ namespace AndroMooda3
             mCloseButton = FindViewById<ImageButton>(Resource.Id.button_close);
             errorButton = FindViewById<Button>(Resource.Id.error_button);
 
-            errorButton.Click += delegate { errorHandler.ShowError("Error Handler Works!!"); };
+            errorButton.Click += delegate {
+                errorHandler.ShowError("Error Handler Works!!");
+                //throw new Exception("TEST WORKS!!!!");
+            };
 
             mCaptureButton.Click += (e, v) => camera.TakePicture();
             mCloseButton.Click += (e, v) => camera.ResumePreview();

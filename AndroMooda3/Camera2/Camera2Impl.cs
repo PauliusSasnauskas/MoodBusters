@@ -99,7 +99,7 @@ namespace AndroMooda3
             }
         }
 
-        public Camera2Impl(IErrorHandler errorHandler, MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface)
+        public Camera2Impl(IErrorHandler errorHandler, MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface, PictureCallback pictureTaken)
         {
             this.errorHandler = errorHandler;
             this.activity = activity;
