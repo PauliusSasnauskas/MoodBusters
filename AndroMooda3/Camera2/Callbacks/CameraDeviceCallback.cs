@@ -11,10 +11,10 @@ namespace AndroMooda3.Callbacks
     public class CameraDeviceCallback : CameraDevice.StateCallback
     {
         private readonly Surface surface;
-        private readonly MainActivity activity;
+        private readonly CameraActivity activity;
         private readonly Camera2Impl camera;
 
-        public CameraDeviceCallback(MainActivity activity, Camera2Impl camera, Surface surface)
+        public CameraDeviceCallback(CameraActivity activity, Camera2Impl camera, Surface surface)
         {
             this.camera = camera;
             this.surface = surface;

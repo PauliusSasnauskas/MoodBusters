@@ -18,7 +18,6 @@ namespace AndroMooda3.Callbacks
     class CameraCaptureSessionCaptureCallback : CameraCaptureSession.CaptureCallback
     {
         private readonly View v;
-        private readonly File f;
         private readonly Camera2Impl camera;
         public CameraCaptureSessionCaptureCallback(View v, Camera2Impl camera)
         {

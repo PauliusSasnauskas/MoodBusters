@@ -74,11 +74,12 @@
     <Compile Include="Camera2\Listeners\Camera2SurfaceTextureListener.cs" />
     <Compile Include="Camera2\Listeners\CameraImageAvailableListener.cs" />
     <Compile Include="ErrorAspect.cs" />
-    <Compile Include="TrustSomething.cs" />
-    <Compile Include="VerifierSomething.cs" />
     <Compile Include="ErrorHandlerAndroid.cs" />
-    <Compile Include="WebRequestRecognitionApi.cs" />
+    <Compile Include="ImageGridAdapter.cs" />
+    <Compile Include="ImageItem.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="WebRequestRecognitionApi.cs" />
+    <Compile Include="Camera2\CameraActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,7 +89,7 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\activity_main.xml">
+    <AndroidResource Include="Resources\layout\activity_camera.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\colors.xml" />
@@ -142,6 +143,25 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\close.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_main.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\values.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\image_plus.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_images.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\face.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

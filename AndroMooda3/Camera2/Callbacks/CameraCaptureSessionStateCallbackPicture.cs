@@ -6,15 +6,13 @@ namespace AndroMooda3.Callbacks
 {
     public class CameraCaptureSessionCallbackPicture : CameraCaptureSession.StateCallback
     {
-        private readonly MainActivity activity;
+        private readonly CameraActivity activity;
         private readonly Camera2Impl camera;
-        private readonly CaptureRequest.Builder builder;
-        private readonly CameraCaptureSession.CaptureCallback callback;
 
         public delegate void ConfiguredDelegate(CameraCaptureSession session);
         public event ConfiguredDelegate OnConfiguredEvent;
 
-        public CameraCaptureSessionCallbackPicture(MainActivity activity, Camera2Impl camera)
+        public CameraCaptureSessionCallbackPicture(CameraActivity activity, Camera2Impl camera)
         {
             this.activity = activity;
             this.camera = camera;
