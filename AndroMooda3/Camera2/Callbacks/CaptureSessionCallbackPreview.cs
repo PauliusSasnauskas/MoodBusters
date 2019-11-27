@@ -1,6 +1,7 @@
 ﻿using Android.Hardware.Camera2;
 using Android.Support.Design.Widget;
 using Android.Widget;
+using System;
 
 namespace AndroMooda3
 {
@@ -26,7 +27,7 @@ namespace AndroMooda3
         }
         public override void OnConfigureFailed(CameraCaptureSession cameraCaptureSession)
         {
-            Snackbar.Make(a.rootView, "Configuration change", Snackbar.LengthShort).Show();
+            throw new Exception("Capture session configuration failed.");
         }
     }
 }

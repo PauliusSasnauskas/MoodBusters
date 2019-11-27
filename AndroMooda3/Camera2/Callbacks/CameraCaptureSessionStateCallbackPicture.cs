@@ -1,6 +1,7 @@
 ﻿
 using Android.Hardware.Camera2;
 using Android.Support.Design.Widget;
+using System;
 
 namespace AndroMooda3.Callbacks
 {
@@ -23,17 +24,16 @@ namespace AndroMooda3.Callbacks
             try
             {
                 OnConfiguredEvent(session);
-                //session.Capture(builder.Build(), callback, null);
             }
             catch (CameraAccessException e)
             {
-                Snackbar.Make(activity.rootView, "CameraAccessException: " + e.Message, Snackbar.LengthShort).Show();
+                throw new Exception("Camera access exception.", e);
             }
         }
 
         public override void OnConfigureFailed(CameraCaptureSession session)
         {
-            Snackbar.Make(activity.rootView, "OnConfigureFailed", Snackbar.LengthShort).Show();
+            throw new Exception("Camera capture session configuration failed");
         }
     }
 }

@@ -21,7 +21,6 @@ using Plugin.CurrentActivity;
 namespace AndroMooda3
 {
     [Activity(Label = "Camera")]
-    [ErrorAspect]
     public class CameraActivity : AppCompatActivity
     {
         public const int REQUEST_CAMERA = 100;
@@ -35,18 +34,22 @@ namespace AndroMooda3
 
         private readonly static string LOG_TAG = "CameraActivity";
 
-        IRecognitionApi recognitionApi = new WebRequestRecognitionApi("https://192.168.43.105:45456/api/mood");
+        IRecognitionApi recognitionApi;
 
-        [ErrorAspect]
+        public CameraActivity()
+        {
+            recognitionApi = new WebRequestRecognitionApi(BaseContext.GetString(Resource.String.api_link));
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_camera);
-            CrossCurrentActivity.Current.Init(this.Application);
+            CrossCurrentActivity.Current.Init(Application);
 
-            errorHandler = new ErrorHandlerAndroid(this);
+            errorHandler = new ErrorHandlerAndroid();
 
             rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
 
@@ -74,7 +77,7 @@ namespace AndroMooda3
                 }
                 catch (AggregateException e)
                 {
-                    Snackbar.Make(rootView, "Failed to process your mood.", Snackbar.LengthShort).Show();
+                    errorHandler.ShowError("Failed to process your mood.");
                     Log.Verbose(LOG_TAG, e.Message);
                     Log.Verbose(LOG_TAG, e.StackTrace);
                     return;

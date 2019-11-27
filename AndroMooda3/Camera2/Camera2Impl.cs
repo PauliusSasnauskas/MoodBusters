@@ -33,8 +33,6 @@ namespace AndroMooda3
         internal CameraCaptureSession session;
         private IErrorHandler errorHandler;
 
-        //private readonly string LOG_TAG = "Camera2Impl";
-
         private int mWidth;
         private int mHeight;
 
@@ -79,15 +77,15 @@ namespace AndroMooda3
             }
             catch (CameraAccessException e)
             {
-                e.PrintStackTrace();
+                errorHandler.HandleException(e);
             }
         }
 
         internal void ContinuePreview()
         {
-            if (null == cameraDevice)
+            if (cameraDevice == null)
             {
-                errorHandler.ShowError("App error: cannot show preview.");
+                errorHandler.ShowError("Cannot continue preview.");
             }
             captureRequestBuilder.Set(CaptureRequest.ControlMode, (int)ControlMode.Auto);
             try
@@ -96,7 +94,7 @@ namespace AndroMooda3
             }
             catch (CameraAccessException e)
             {
-                e.PrintStackTrace();
+                errorHandler.HandleException(e);
             }
         }
 
@@ -125,8 +123,6 @@ namespace AndroMooda3
             }
             errorHandler.ShowError("Could not find front facing camera");
             return null;
-
-            // TODO: Create Exception "Front camera not found"
         }
 
         public void TakePicture()
@@ -134,9 +130,10 @@ namespace AndroMooda3
             if (cameraDevice == null)
             {
                 errorHandler.ShowError("Cannot take picture; no camera detected");
-                // TODO: Throw exception
             }
+
             CameraCharacteristics characteristics = cameraManager.GetCameraCharacteristics(FrontCameraId);
+
             Size[] jpegSizes = null;
             if (characteristics != null)
             {
@@ -183,13 +180,19 @@ namespace AndroMooda3
             reader.SetOnImageAvailableListener(new CameraImageAvailableListener(pictureTaken), null);
             CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSessionCaptureCallback(rootView, this);
 
-            var ccscc = new CameraCaptureSessionCallbackPicture(activity, this as Camera2Impl);
-            ccscc.OnConfiguredEvent += (session) =>
+            try
             {
-                session.Capture(captureBuilder.Build(), captureListener, null);
-            };
-
-            cameraDevice.CreateCaptureSession(outputSurfaces, ccscc, null);
+                var ccscc = new CameraCaptureSessionCallbackPicture(activity, this as Camera2Impl);
+                ccscc.OnConfiguredEvent += (session) =>
+                {
+                    session.Capture(captureBuilder.Build(), captureListener, null);
+                };
+                cameraDevice.CreateCaptureSession(outputSurfaces, ccscc, null);
+            }
+            catch(Exception e)
+            {
+                errorHandler.HandleException(e);
+            }
         }
 
         public void StartPreview(TextureView textureView)
@@ -204,14 +207,11 @@ namespace AndroMooda3
                 string camId = FrontCameraId;
                 cameraManager.OpenCamera(camId, new CameraDeviceCallback(activity, this, surface), null);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                errorHandler.ShowError("Front camera not available");
+                errorHandler.HandleException(e, "Front camera not available");
             }
         }
-
-        //StreamConfigurationMap map = camChar.Get(CameraCharacteristics.ScalerStreamConfigurationMap) as StreamConfigurationMap;
-        //Size size = map.GetOutputSizes(256)[0];
 
         public void Dispose()
         {
@@ -223,7 +223,6 @@ namespace AndroMooda3
         {
             if (b)
             {
-                //surface.Dispose();
                 cameraManager.Dispose();
                 cameraCharacteristics.Dispose();
                 return;

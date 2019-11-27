@@ -1,6 +1,7 @@
 ﻿
 using Android.Hardware.Camera2;
 using Android.Support.Design.Widget;
+using System;
 
 namespace AndroMooda3.Callbacks
 {
@@ -19,8 +20,7 @@ namespace AndroMooda3.Callbacks
         {
             if (camera == null)
             {
-                // TODO: fix something if camera null
-                Snackbar.Make(activity.rootView, "Camera is null", Snackbar.LengthShort).Show();
+                throw new NullReferenceException("Camera is null");
             }
             camera.session = session;
             camera.captureRequestBuilder.Set(CaptureRequest.ControlMode, 1);
@@ -29,7 +29,7 @@ namespace AndroMooda3.Callbacks
 
         public override void OnConfigureFailed(CameraCaptureSession session)
         {
-            Snackbar.Make(activity.rootView, "OnConfigureFailed", Snackbar.LengthShort).Show();
+            throw new Exception("Camera configuration failed");
         }
     }
 }

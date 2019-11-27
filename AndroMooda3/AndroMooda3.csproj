@@ -73,7 +73,6 @@
     <Compile Include="Camera2\Callbacks\CaptureSessionCallbackPreview.cs" />
     <Compile Include="Camera2\Listeners\Camera2SurfaceTextureListener.cs" />
     <Compile Include="Camera2\Listeners\CameraImageAvailableListener.cs" />
-    <Compile Include="ErrorAspect.cs" />
     <Compile Include="ErrorHandlerAndroid.cs" />
     <Compile Include="ImageGridAdapter.cs" />
     <Compile Include="ImageItem.cs" />
