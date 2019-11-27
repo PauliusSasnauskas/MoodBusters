@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mood_Busters {
+namespace AndroMooda3 {
     using System;
     
     
@@ -102,6 +102,15 @@ namespace Mood_Busters {
         internal static string ErrLoading {
             get {
                 return ResourceManager.GetString("ErrLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Null Pointer Exception.
+        /// </summary>
+        internal static string ErrNull {
+            get {
+                return ResourceManager.GetString("ErrNull", resourceCulture);
             }
         }
         

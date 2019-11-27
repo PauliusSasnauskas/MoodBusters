@@ -1,4 +1,4 @@
-﻿namespace Mood_Busters
+﻿namespace AndroMooda3
 { 
     partial class MBWindow
     {
@@ -32,6 +32,9 @@
             this.uploadButton = new System.Windows.Forms.Button();
             this.getMoodButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.redButton = new System.Windows.Forms.Button();
+            this.colorLabel = new System.Windows.Forms.Label();
+            this.blueButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.analyzedImageBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +50,7 @@
             // 
             // uploadButton
             // 
-            this.uploadButton.BackgroundImage = global::Mood_Busters.Properties.Resources.browse;
+            this.uploadButton.BackgroundImage = global::AndroMooda3.Properties.Resources.browse;
             this.uploadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.uploadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.uploadButton.ForeColor = System.Drawing.Color.Black;
@@ -61,7 +64,7 @@
             // 
             // getMoodButton
             // 
-            this.getMoodButton.BackgroundImage = global::Mood_Busters.Properties.Resources.take_picture;
+            this.getMoodButton.BackgroundImage = global::AndroMooda3.Properties.Resources.take_picture;
             this.getMoodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.getMoodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.getMoodButton.ForeColor = System.Drawing.Color.Black;
@@ -74,7 +77,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.BackgroundImage = global::Mood_Busters.Properties.Resources.save;
+            this.saveButton.BackgroundImage = global::AndroMooda3.Properties.Resources.save;
             this.saveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.Color.Black;
@@ -85,12 +88,54 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // redButton
+            // 
+            this.redButton.BackColor = System.Drawing.Color.DodgerBlue;
+            this.redButton.Font = new System.Drawing.Font("Copperplate Gothic Light", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.redButton.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.redButton.Location = new System.Drawing.Point(18, 419);
+            this.redButton.Name = "redButton";
+            this.redButton.Size = new System.Drawing.Size(104, 52);
+            this.redButton.TabIndex = 8;
+            this.redButton.Text = "Red";
+            this.redButton.UseVisualStyleBackColor = false;
+            this.redButton.Click += new System.EventHandler(this.redButton_Click);
+            // 
+            // colorLabel
+            // 
+            this.colorLabel.AutoSize = true;
+            this.colorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.colorLabel.Font = new System.Drawing.Font("Old English Text MT", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorLabel.ForeColor = System.Drawing.Color.DarkViolet;
+            this.colorLabel.Location = new System.Drawing.Point(165, 425);
+            this.colorLabel.Name = "colorLabel";
+            this.colorLabel.Size = new System.Drawing.Size(111, 33);
+            this.colorLabel.TabIndex = 9;
+            this.colorLabel.Text = "initel D";
+            this.colorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // blueButton
+            // 
+            this.blueButton.BackColor = System.Drawing.Color.Maroon;
+            this.blueButton.Font = new System.Drawing.Font("Copperplate Gothic Light", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blueButton.ForeColor = System.Drawing.Color.Red;
+            this.blueButton.Location = new System.Drawing.Point(295, 419);
+            this.blueButton.Name = "blueButton";
+            this.blueButton.Size = new System.Drawing.Size(104, 52);
+            this.blueButton.TabIndex = 10;
+            this.blueButton.Text = "Blue";
+            this.blueButton.UseVisualStyleBackColor = false;
+            this.blueButton.Click += new System.EventHandler(this.blueButton_Click);
+            // 
             // MBWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(430, 575);
+            this.Controls.Add(this.blueButton);
+            this.Controls.Add(this.colorLabel);
+            this.Controls.Add(this.redButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.getMoodButton);
             this.Controls.Add(this.uploadButton);
@@ -102,6 +147,7 @@
             this.Load += new System.EventHandler(this.MBWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.analyzedImageBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -111,6 +157,9 @@
         private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.Button getMoodButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button redButton;
+        private System.Windows.Forms.Label colorLabel;
+        private System.Windows.Forms.Button blueButton;
     }
 }
 

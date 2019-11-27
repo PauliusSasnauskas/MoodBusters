@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     public abstract class BoundingBoxPainter
     {
