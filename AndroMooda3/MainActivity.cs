@@ -22,7 +22,6 @@ using Plugin.CurrentActivity;
 namespace AndroMooda3
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
-    [ErrorAspect]
     public class MainActivity : AppCompatActivity
     {
         public const int REQUEST_CAMERA = 100;
@@ -32,7 +31,7 @@ namespace AndroMooda3
         private ImageButton mCaptureButton;
         private ImageButton mCloseButton;
         private Button errorButton;
-        private ErrorHandlerAndroid errorHandler;
+        private ErrorHandlerAndroid errorHandler = new ErrorHandlerAndroid();
 
         private readonly static string LOG_TAG = "MainActivity";
 
@@ -55,16 +54,13 @@ namespace AndroMooda3
             } 
         } 
 
-        [ErrorAspect]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.activity_main);
-            CrossCurrentActivity.Current.Init(this.Application);
-
-            errorHandler = new ErrorHandlerAndroid(this);
 
             rootView = FindViewById<RelativeLayout>(Resource.Id.rootView);
 

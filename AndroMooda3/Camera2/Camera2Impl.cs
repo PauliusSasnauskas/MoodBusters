@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MoodBustersLibrary;
 using Orientation = Android.Media.Orientation;
+using Autofac;
 
 namespace AndroMooda3
 {

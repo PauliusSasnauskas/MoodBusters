@@ -73,7 +73,6 @@
     <Compile Include="Camera2\Callbacks\CaptureSessionCallbackPreview.cs" />
     <Compile Include="Camera2\Listeners\Camera2SurfaceTextureListener.cs" />
     <Compile Include="Camera2\Listeners\CameraImageAvailableListener.cs" />
-    <Compile Include="ErrorAspect.cs" />
     <Compile Include="TrustSomething.cs" />
     <Compile Include="VerifierSomething.cs" />
     <Compile Include="ErrorHandlerAndroid.cs" />
@@ -117,6 +116,9 @@
     <AndroidResource Include="Resources\drawable\camera_iris.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac">
+      <Version>4.9.4</Version>
+    </PackageReference>
     <PackageReference Include="Castle.Core">
       <Version>4.4.0</Version>
     </PackageReference>
