@@ -19,7 +19,7 @@ namespace AndroMooda3
 {
     public class Camera2Impl : IDisposable
     {
-        private readonly MainActivity activity;
+        private readonly CameraActivity activity;
         private readonly TextureView textureView;
         private readonly View rootView;
         private readonly PreviewCallback showPreviewInterface;
@@ -100,7 +100,7 @@ namespace AndroMooda3
             }
         }
 
-        public Camera2Impl(IErrorHandler errorHandler, MainActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface, PictureCallback pictureTaken)
+        public Camera2Impl(IErrorHandler errorHandler, CameraActivity activity, TextureView textureView, View rootView, PreviewCallback showPreviewInterface, PreviewCallback hidePreviewInterface, PictureCallback pictureTaken)
         {
             this.errorHandler = errorHandler;
             this.activity = activity;

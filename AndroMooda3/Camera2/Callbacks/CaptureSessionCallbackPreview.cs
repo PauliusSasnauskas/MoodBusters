@@ -7,8 +7,8 @@ namespace AndroMooda3
     internal class CaptureSessionCallbackPreview : CameraCaptureSession.StateCallback
     {
         private Camera2Impl c;
-        private MainActivity a;
-        public CaptureSessionCallbackPreview(Camera2Impl c, MainActivity a)
+        private CameraActivity a;
+        public CaptureSessionCallbackPreview(Camera2Impl c, CameraActivity a)
         {
             this.c = c;
             this.a = a;
