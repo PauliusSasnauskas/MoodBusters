@@ -4,7 +4,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using MoodBustersLibrary;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     class CameraBox : ICameraBox
     {

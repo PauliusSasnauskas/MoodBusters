@@ -5,8 +5,10 @@ using System.Drawing.Imaging;
 using System.Collections.Generic;
 using MoodBustersLibrary;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Drawing;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     public partial class MBWindow : Form
     {
@@ -15,7 +17,9 @@ namespace Mood_Busters
         private IImageSaver saveDialog;
         public static IErrorHandler errorHandler = new ErrorHandlerWindows();
         private MemoryStream memStream;
-        
+        Thread blue;
+        Thread red;
+
         public MBWindow(IRecognitionApi apiClient)
         {
             InitializeComponent();
@@ -76,6 +80,38 @@ namespace Mood_Busters
         private void SaveButton_Click(object sender, EventArgs e)
         {
             saveDialog.Save(analyzedImageBox);
+        }
+
+        private void changeLabelColor(Color color) {
+            lock (colorLabel) {
+                colorLabel.ForeColor = color;
+                Thread.Sleep(3000);
+            }
+        }
+
+        private void blueButton_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.R2 = 180;
+            Properties.Settings.Default.G2 = 180;
+            Properties.Settings.Default.B2 = 255;
+            Properties.Settings.Default.A2 = 255;
+            if (blue == null || !blue.IsAlive) { 
+                blue = new Thread(() => changeLabelColor(Color.CadetBlue));
+                blue.Start();
+            }
+        }
+
+        private void redButton_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.R2 = 221;
+            Properties.Settings.Default.G2 = 64;
+            Properties.Settings.Default.B2 = 64;
+            Properties.Settings.Default.A2 = 237;
+            if (red == null || !red.IsAlive)
+            {
+                red = new Thread(() => changeLabelColor(Color.MediumVioletRed));
+                red.Start();
+            }
         }
     }
 }

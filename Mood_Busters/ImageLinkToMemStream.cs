@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     static class ImageLinkToMemStream
     {

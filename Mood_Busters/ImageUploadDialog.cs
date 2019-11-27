@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     static class ImageUploadDialog
     {

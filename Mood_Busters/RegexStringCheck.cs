@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     static class RegexStringCheck
     {

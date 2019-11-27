@@ -5,7 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Mood_Busters
+namespace AndroMooda3
 {
     class WebRequestRecognitionApi : IRecognitionApi
     {
