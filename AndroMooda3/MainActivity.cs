@@ -42,23 +42,10 @@ namespace AndroMooda3
             recyclerView.SetAdapter(imageAdapter);
 
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.btn_add_image);
-            fab.SetOnClickListener(new DelegateClickListener(()=> {
+            fab.Click += (sender, eventArgs) => {
                 errorHandler.HandleAndExit("Something went wrong...");
-            }));
+            };
         }
     }
 
-    internal class DelegateClickListener : Java.Lang.Object, View.IOnClickListener
-    {
-        Action action;
-        public DelegateClickListener(Action action)
-        {
-            this.action = action;
-        }
-
-        public void OnClick(View v)
-        {
-            action();
-        }
-    }
 }
