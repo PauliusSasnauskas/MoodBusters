@@ -19,13 +19,11 @@ namespace AndroMooda3
             alert.Show();
         }
 
-        public void HandleAndExit(string errorText, string errorName = "Error")
+        public async void HandleAndExit(string errorText, string errorName = "Error")
         {
             ShowError(errorText, errorName);
-            //Task a = new Task(() => ShowError(errorText, errorName));
-            //a.Start();
-            //a.ContinueWith((previousTask) => Thread.Sleep(2000));
-            //activity.FinishAffinity();
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            activity.FinishAffinity();
         }
 
         public void HandleException(Exception e, string errorName = "Error")
