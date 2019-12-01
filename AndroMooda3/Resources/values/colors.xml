@@ -5,6 +5,12 @@
   <color name="colorAccent">#FF9400</color>
 
   <color name="colorHappy">#64DD17</color>
-  <color name="colorNeutral">#BDBDBD</color>
   <color name="colorSad">#FF8A65</color>
+  <color name="colorAngry">#FF6F00</color>
+  <color name="colorConfused">#4527A0</color>
+  <color name="colorDisgusted">#AEEA00</color>
+  <color name="colorSurprised">#FFEE58</color>
+  <color name="colorCalm">#81D4FA</color>
+  <color name="colorFear">#212121</color>
+  <color name="colorNeutral">#BDBDBD</color>
 </resources>

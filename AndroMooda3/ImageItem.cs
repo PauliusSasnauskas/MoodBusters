@@ -1,14 +1,14 @@
 ﻿using MoodBustersLibrary;
-using System.Drawing;
+using Android.Graphics;
 
 namespace AndroMooda3
 {
     internal class ImageItem
     {
-        public Image img { get; set; }
+        public Bitmap img { get; set; }
         public MoodName mood { get; set; }
 
-        public ImageItem(Image img, MoodName mood)
+        public ImageItem(Bitmap img, MoodName mood)
         {
             this.img = img;
             this.mood = mood;
