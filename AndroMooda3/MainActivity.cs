@@ -48,6 +48,12 @@ namespace AndroMooda3
                 });
             }
 
+            items = items.Skip(4).Take(25).ToList();
+
+            string feelings = items.Aggregate("People are feeling ", (string acc, ImageItem item) => acc + item.mood.ToString() + ", ");
+
+            Snackbar.Make(recyclerView.RootView, feelings, Snackbar.LengthShort).Show();
+
             imageAdapter = new ImageGridAdapter(this, items);
             recyclerView.SetAdapter(imageAdapter);
 
