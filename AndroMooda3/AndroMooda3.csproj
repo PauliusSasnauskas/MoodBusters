@@ -41,6 +41,7 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -54,6 +55,7 @@
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -73,9 +75,12 @@
     <Compile Include="Camera2\Callbacks\CaptureSessionCallbackPreview.cs" />
     <Compile Include="Camera2\Listeners\Camera2SurfaceTextureListener.cs" />
     <Compile Include="Camera2\Listeners\CameraImageAvailableListener.cs" />
+    <Compile Include="Database\Log.cs" />
+    <Compile Include="Database\Photoalbums.cs" />
     <Compile Include="ErrorHandlerAndroid.cs" />
     <Compile Include="ImageGridAdapter.cs" />
     <Compile Include="ImageItem.cs" />
+    <Compile Include="ImageList.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="WebRequestRecognitionApi.cs" />
     <Compile Include="Camera2\CameraActivity.cs" />
