@@ -18,6 +18,7 @@ namespace MoodBustersWebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            DbTest.Main(null);
         }
     }
 }
