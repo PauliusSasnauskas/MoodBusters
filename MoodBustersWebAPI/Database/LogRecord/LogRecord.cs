@@ -8,10 +8,10 @@ namespace MoodBustersWebAPI.Database
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("User")]
+        [ForeignKey("[User]")]
         public int UserId { get; set; }
         [Required]
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime { get; set; } = DateTime.Now;
         [Required]
         public ulong ByteCount { get; set; }
     }

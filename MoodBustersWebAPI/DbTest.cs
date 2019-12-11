@@ -11,7 +11,7 @@ namespace MoodBustersWebAPI
             {
                 User stasas = new User
                 {
-                    Ip = 2,
+                    Ip = "2",
                     Name = "Stasys"
                 };
                 userService.Add(stasas);

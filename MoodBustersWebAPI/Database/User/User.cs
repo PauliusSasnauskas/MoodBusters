@@ -8,7 +8,7 @@ namespace MoodBustersWebAPI.Database
         [Key]
         public int Id { get; set; }
         [Required]
-        public int Ip { get; set; }
+        public string Ip { get; set; }
         [Required]
         public string Name { get; set; }
     }

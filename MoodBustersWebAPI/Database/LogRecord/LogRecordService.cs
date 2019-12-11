@@ -17,6 +17,7 @@ namespace MoodBustersWebAPI.Database
         public void Add(LogRecord logRecord)
         {
             context.LogRecords.Add(logRecord);
+            context.SaveChanges();
         }
 
         public void Delete(int id)

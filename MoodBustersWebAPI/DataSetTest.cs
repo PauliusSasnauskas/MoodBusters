@@ -19,16 +19,21 @@ namespace MoodBustersWebAPI
 
                 connection.Open();
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT Id, Ip, Name FROM [dbo].[User]", connection);
-                
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT Id, Ip, Name FROM [User]", connection);
 
                 DataSet bistroSet = new DataSet();
-                dataAdapter.Fill(bistroSet);
+                dataAdapter.Fill(bistroSet, "User");
 
-                DataTable userTable = bistroSet.Tables[0];
-                dataAdapter.Fill(userTable);
-                
-                string a = "Tables:\n" + bistroSet.Tables[0].TableName;
+                dataAdapter.SelectCommand = new SqlCommand("SELECT Id, UserId, DateTime, ByteCount FROM [LogRecord]", connection);
+                dataAdapter.Fill(bistroSet, "LogRecord");
+
+                string a = "Log:\n";
+                foreach (DataRow row in bistroSet.Tables["LogRecord"].Rows)
+                {
+                    a += "UserId: " + row.Field<int>("UserId") + ", ";
+                    a += "Time: " + row.Field<DateTime>("DateTime").ToString() + ", ";
+                    a += "Bytes sent: " + row.Field<decimal>("ByteCount").ToString() + '\n';
+                }
                 return a;
             }
         }

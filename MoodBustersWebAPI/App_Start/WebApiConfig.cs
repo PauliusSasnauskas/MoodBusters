@@ -1,6 +1,8 @@
 ﻿using MoodBustersLibrary;
 using System;
+using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Xml.Serialization;
 
 namespace MoodBustersWebAPI
 {
@@ -18,7 +20,8 @@ namespace MoodBustersWebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            DbTest.Main(null);
+
+            //DbTest.Main(null);
         }
     }
 }

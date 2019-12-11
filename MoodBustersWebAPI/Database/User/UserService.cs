@@ -40,6 +40,22 @@ namespace MoodBustersWebAPI.Database
             else throw new Exception("Specified user not found.");
         }
 
+        public User GetUserByIP(string ip)
+        {
+            if (ip == null) ip = "penki";
+            User user = context.Users.Where(u => u.Ip == ip).FirstOrDefault();
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                User newUser = new User { Ip = ip, Name = "Vytas" };
+                Add(newUser);
+                return newUser;
+            }
+        }
+
         public void Update(User userChanges)
         {
             context.Users.Update(userChanges);
@@ -53,6 +69,7 @@ namespace MoodBustersWebAPI.Database
             }
             catch (DbUpdateException e)
             {
+                throw e;
                 //implement exception
             }
             context.Dispose();
