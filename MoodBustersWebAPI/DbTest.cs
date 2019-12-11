@@ -7,10 +7,11 @@ namespace MoodBustersWebAPI
     {
         public static void Main(string[] args)
         {
-            //using (UserService service = new UserService())
-            //{
-            //  do whatewer you want ;)
-            //}
+            using (UserService service = new UserService())
+            {
+                //do whatewer you want ;)
+                service.Add(new User { Ip = 2, Name = "Stasys" });
+            }
         }
     }
 }
