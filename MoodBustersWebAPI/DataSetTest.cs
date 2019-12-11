@@ -17,22 +17,18 @@ namespace MoodBustersWebAPI
             {
                 connection.ConnectionString = WebConfigurationManager.ConnectionStrings["MoodBistroDBConnectionString"].ConnectionString;
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
                 connection.Open();
 
-                dataAdapter.SelectCommand = new SqlCommand("SELECT Id, Ip, Name FROM User", connection);
-                DataTable userTable = new DataTable("User");
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT Id, Ip, Name FROM [dbo].[User]", connection);
+                
+
+                DataSet bistroSet = new DataSet();
+                dataAdapter.Fill(bistroSet);
+
+                DataTable userTable = bistroSet.Tables[0];
                 dataAdapter.Fill(userTable);
-
-                dataAdapter.SelectCommand = new SqlCommand("SELECT Id, UserId, DateTime, ByteCount FROM dbo.LogRecord", connection);
-                DataTable logTable = new DataTable("LogRecord");
-                dataAdapter.Fill(logTable);
-
-                DataSet bistroSet = new DataSet("MoodBistro");
-                bistroSet.Tables.Add(userTable);
-                bistroSet.Tables.Add(logTable);
-
-                string a = "Tables:\n" + bistroSet.Tables[0].TableName + " " + bistroSet.Tables[1];
+                
+                string a = "Tables:\n" + bistroSet.Tables[0].TableName;
                 return a;
             }
         }
