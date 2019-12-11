@@ -23,10 +23,6 @@ namespace MoodBustersWebAPI.Database
                 dataAdapter.Fill(dataSet);
                     
                 DataTable dataTable = new DataTable("LogRecord");
-
-
-
-
             }
         }
     }
