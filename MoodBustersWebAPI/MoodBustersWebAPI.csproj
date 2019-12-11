@@ -214,7 +214,7 @@
     <Compile Include="AmazonRekognitionApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MoodController.cs" />
-    <Compile Include="Database\DataSetTest.cs" />
+    <Compile Include="DataSetTest.cs" />
     <Compile Include="Database\LogRecord\ILogRecordRepository.cs" />
     <Compile Include="Database\BistroContext.cs" />
     <Compile Include="Database\LogRecord\LogRecord.cs" />

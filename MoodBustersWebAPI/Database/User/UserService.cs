@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,6 @@ namespace MoodBustersWebAPI.Database
         public void Add(User user)
         {
             context.Users.Add(user);
-            context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -47,7 +47,14 @@ namespace MoodBustersWebAPI.Database
 
         public void Dispose()
         {
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                //implement exception
+            }
             context.Dispose();
         }
 

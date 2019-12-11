@@ -22,7 +22,8 @@ namespace MoodBustersWebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetHello()
         {
-            return Ok("Hello World!");
+            DataSetTest test = new DataSetTest();
+            return Ok(test.PrintTables());
         }
     }
 }

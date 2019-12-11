@@ -18,7 +18,7 @@ namespace MoodBustersWebAPI.Database
         {
             modelBuilder.Entity<LogRecord>().ToTable("LogRecord");
             modelBuilder.Entity<User>().ToTable("User");
-            modelBuilder.Entity<User>().HasIndex(a => a.Ip).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(user => user.Ip).IsUnique();
             modelBuilder.Entity<LogRecord>().Property(record => record.DateTime).HasDefaultValue(DateTime.Now);
         }
 
