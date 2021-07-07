@@ -16,5 +16,10 @@ namespace AndroMooda3
             ShowError(errorText, errorName);
             Environment.Exit(0);
         }
+
+        public void HandleException(Exception e, string errorName = "Error")
+        {
+            throw new NotImplementedException();
+        }
     }
 }
